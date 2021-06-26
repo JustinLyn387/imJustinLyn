@@ -38,23 +38,81 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+
+      <!-- Homepage component -->
+      <Homepage class="component"/>
+
+      <!-- About me component -->
+      <AboutMe class="component"/>
+
+      <!-- Work experience component -->
+      <WorkExperience class="component"/>
+
+      <!-- My projects component -->
+      <Projects class="component"/>
+
+      <!-- Lets connect component -->
+      <Connect class="component"/>
+
+      <v-footer class="font-weight-medium pa-0" style="justify-content: center" elevation="9" color="#181818">
+        <v-row class="footerBar ma-0">
+          <v-row class="ma-0">
+            <v-col class="footerText" cols="10">
+              <strong>Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
+            </v-col>
+          </v-row>
+        </v-row>
+      </v-footer>
+
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+
+import Homepage from './components/Homepage';
+import AboutMe from './components/AboutMe';
+import WorkExperience from './components/WorkExperience';
+import Projects from './components/Projects';
+import Connect from './components/Connect';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    Homepage, AboutMe, WorkExperience, Projects, Connect
   },
 
   data: () => ({
     //
   }),
-};
+}
 </script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap');
+
+  #contentCol {
+    max-width: 1450px;
+  }
+  .component {
+    min-height: 95vh;
+    padding: 45px 100px;
+  }
+  .heading {
+    font-family: 'Ramabhadra', sans-serif;
+    font-weight: bolder;
+    font-size: 40px;
+    padding-bottom: 30px;
+  }
+  .footerBar{
+    height: 50px;
+  }
+  .footerText{
+    color: white;
+    text-align: center;
+    min-width: 100%;
+    margin: 0;
+  }
+
+</style>
