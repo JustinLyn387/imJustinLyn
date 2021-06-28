@@ -1,5 +1,5 @@
 <template>
-    <v-container id="connectContainer">
+    <v-container class="connectContainer">
         <v-row justify="center">
             <v-col id="contentCol">
                 <h1 class="heading">Let's Connect</h1>
@@ -15,9 +15,9 @@ export default {
 </script>
 
 <style scoped>
-    #connectContainer {
+    .connectContainer {
         min-width: 100%;
-        background-color: #02457A;
+        background-color: #DC143C;
     }
 
 </style>

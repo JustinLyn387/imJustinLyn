@@ -1,60 +1,55 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
     <v-main>
 
-      <!-- Homepage component -->
-      <Homepage class="component"/>
+      <v-btn v-if="sideMenu" @click="showMenu = !showMenu" class="menuBtn" outlined><v-icon>mdi-menu</v-icon></v-btn>
 
-      <!-- About me component -->
-      <AboutMe class="component"/>
+      <v-dialog v-model="showMenu" fullscreen persistent transition="v-scroll-y-transition">
+        <v-container class="menu pt-6">
+          <v-row justify="end" class="pr-4">
+            <v-btn outlined @click="showMenu = !showMenu" color="white" class="closeBtn"><v-icon>mdi-close</v-icon></v-btn>
+          </v-row>
+          <v-row class="menuRow">
+            <v-row>
+              <v-col>
+                <v-row v-for="option in sideMenuOptions" :key="option.label" justify="center">
+                  <p class="menuOption" @click="toggleSideMenu(option.route)">{{ option.label }}</p>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-row>
+        </v-container>
+      </v-dialog>
 
-      <!-- Work experience component -->
-      <WorkExperience class="component"/>
+      <v-row>
+        <v-col v-if="!sideMenu" cols="2" style="height: 101vh; background-color: #181818; color: white">
+          <v-row justify="center" class="pt-12">
+            <v-flex class="heading logo" v-scroll-to="scrollTo('home')">iJL</v-flex>
+          </v-row>
+          <v-row>
+            <v-col style="text-align: right; padding: 60% 25px 0 0">
+              <v-flex v-for="(item, i) in sidePanel" :key="i" class="sideOptions" v-scroll-to="scrollTo(item.value)">{{ item.label }}</v-flex>
+            </v-col>
+          </v-row>
+          <strong style="position: absolute; bottom: 15px; padding-left: 20px">Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
+        </v-col>
 
-      <!-- My projects component -->
-      <Projects class="component"/>
+        <v-col id="contentArea" :cols="mainColumns" style="height: 101vh; overflow-y: auto" class="pl-0">
+          <!-- Homepage component -->
+          <Homepage id="home" class="component" style="position: relative"/>
+          <!-- About me component -->
+          <AboutMe id="about" class="component"/>
+          <!-- Work experience component -->
+          <WorkExperience id="experience" class="component"/>
+          <!-- My projects component -->
+          <Projects id="projects" class="component"/>
+          <!-- Lets connect component -->
+          <Connect id="connect" class="subComponent"/>
+        </v-col>
+      </v-row>
 
-      <!-- Lets connect component -->
-      <Connect class="component"/>
 
-      <v-footer class="font-weight-medium pa-0" style="justify-content: center" elevation="9" color="#181818">
+      <v-footer v-if="sideMenu" class="font-weight-medium pa-0" style="justify-content: center" elevation="9" color="#181818">
         <v-row class="footerBar ma-0">
           <v-row class="ma-0">
             <v-col class="footerText" cols="10">
@@ -84,8 +79,46 @@ export default {
   },
 
   data: () => ({
-    //
+    sideMenu: false,
+    showMenu: false,
+    mainColumns: 10,
+    sideMenuOptions: [
+      { label: 'PROFILES', route: '/profiles' },
+      { label: 'GALLERY', route: '/' },
+      { label: 'CALENDAR', route: '/calendar' },
+      { label: 'CONTRIBUTE', route: '/contribute' },
+      { label: 'ABOUT US', route: '/about' }
+    ],
+    sidePanel: [
+      { label: 'about me', value: 'about' },
+      { label: 'work experience', value: 'experience' },
+      { label: 'projects', value: 'projects' },
+      { label: 'connect', value: 'connect' }
+    ]
   }),
+  mounted() {
+    this.$nextTick(function() {
+      window.addEventListener('resize', this.getWindowWidth);
+      this.getWindowWidth()
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.getWindowWidth);
+  },
+  methods: {
+    toggleSideMenu (screen) {
+      this.sideMenu = !this.sideMenu
+      console.log(screen)
+    },
+    getWindowWidth() {
+      this.sideMenu = document.documentElement.clientWidth < 1300;
+      this.mainColumns = document.documentElement.clientWidth < 1300 ? 12: 10;
+    },
+    scrollTo (section) {
+      console.log('test')
+      return { element: '#' + section, container: '#contentArea', offset: -12 }
+    },
+  }
 }
 </script>
 
@@ -93,17 +126,49 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap');
 
   #contentCol {
-    max-width: 1450px;
+    max-width: 1298px;
+  }
+  #contentArea {
+    padding: 0;
+  }
+  .logo {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    max-width: 15%;
+  }
+  .logo:hover {
+    cursor: pointer;
+  }
+  .sideOptions {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding-bottom: 10px;
+  }
+  .sideOptions:hover {
+    color: #DC143C;
+    cursor: pointer;
   }
   .component {
-    min-height: 95vh;
-    padding: 45px 100px;
+    min-height: 101vh;
+    padding: 65px;
+  }
+  .subComponent {
+    min-height: 36vh;
+    padding: 45px 65px;
   }
   .heading {
+    width: fit-content;
     font-family: 'Ramabhadra', sans-serif;
     font-weight: bolder;
     font-size: 40px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
+    background: linear-gradient(#DC143C, transparent) bottom /var(--d, 35%) 4px no-repeat;
+    transition:0.5s;
+  }
+  .heading:hover {
+    --d: 85%;
   }
   .footerBar{
     height: 50px;
@@ -113,6 +178,38 @@ export default {
     text-align: center;
     min-width: 100%;
     margin: 0;
+  }
+  .menu{
+    min-width: 100%;
+    min-height: 102vh;
+    background-color: #181818;
+  }
+  .menuBtn {
+    position: absolute;
+    margin: 25px;
+    z-index: 6;
+  }
+  .closeBtn {
+    font-size: xx-large;
+    color: #FFFFFF;
+    margin: 25px;
+  }
+  .menuOption{
+    font-family: 'Varela Round', sans-serif;
+    font-size: 30px;
+    color: #FFFFFF;
+    font-weight: bold;
+  }
+  .menuOption:hover{
+    font-family: 'Varela Round', sans-serif;
+    color: #DC143C;
+    cursor: pointer;
+  }
+  .menuRow{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-46%, -50%);
   }
 
 </style>
