@@ -63,7 +63,7 @@ export default {
 
 <style scoped>
     .homeContainer {
-        padding: 0 0 100px 0;
+        padding: 0;
         min-width: 100%;
         overflow-y: hidden;
         overflow-x: hidden;
@@ -75,7 +75,7 @@ export default {
         grid-template-columns: repeat(10, auto);
     }
     div {
-        height: 100vh;
+        height: 101vh;
         transition: background-color 1s;
         z-index: 5;
     }

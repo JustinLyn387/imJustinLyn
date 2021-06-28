@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
 
-      <v-btn v-if="sideMenu" @click="showMenu = !showMenu" class="menuBtn" outlined><v-icon>mdi-menu</v-icon></v-btn>
+      <v-btn v-bind:style="menuBtn" @click="showMenu = !showMenu" class="menuBtn" outlined><v-icon>mdi-menu</v-icon></v-btn>
 
       <v-dialog v-model="showMenu" fullscreen persistent transition="v-scroll-y-transition">
         <v-container class="menu pt-6">
@@ -12,8 +12,8 @@
           <v-row class="menuRow">
             <v-row>
               <v-col>
-                <v-row v-for="option in sideMenuOptions" :key="option.label" justify="center">
-                  <p class="menuOption" @click="toggleSideMenu(option.route)">{{ option.label }}</p>
+                <v-row v-for="(option, i) in sidePanel" :key="i" justify="center">
+                  <v-flex class="menuOption" v-scroll-to="scrollTo(option.value)" @click="showMenu = !showMenu">{{ option.label }}</v-flex>
                 </v-row>
               </v-col>
             </v-row>
@@ -22,7 +22,7 @@
       </v-dialog>
 
       <v-row>
-        <v-col v-if="!sideMenu" cols="2" style="height: 101vh; background-color: #181818; color: white">
+        <v-col v-bind:style="sideMenuStyle" cols="2" style="height: 101vh; background-color: #181818; color: white">
           <v-row justify="center" class="pt-12">
             <v-flex class="heading logo" v-scroll-to="scrollTo('home')">iJL</v-flex>
           </v-row>
@@ -31,7 +31,7 @@
               <v-flex v-for="(item, i) in sidePanel" :key="i" class="sideOptions" v-scroll-to="scrollTo(item.value)">{{ item.label }}</v-flex>
             </v-col>
           </v-row>
-          <strong style="position: absolute; bottom: 15px; padding-left: 20px">Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
+          <strong style="position: absolute; bottom: 15px; padding-left: 20px; font-size: 0.65vw;">Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
         </v-col>
 
         <v-col id="contentArea" :cols="mainColumns" style="height: 101vh; overflow-y: auto" class="pl-0">
@@ -49,7 +49,7 @@
       </v-row>
 
 
-      <v-footer v-if="sideMenu" class="font-weight-medium pa-0" style="justify-content: center" elevation="9" color="#181818">
+      <v-footer v-bind:style="menuBtn" class="font-weight-medium pa-0" style="justify-content: center" elevation="9" color="#181818">
         <v-row class="footerBar ma-0">
           <v-row class="ma-0">
             <v-col class="footerText" cols="10">
@@ -73,22 +73,14 @@ import Connect from './components/Connect';
 
 export default {
   name: 'App',
-
   components: {
     Homepage, AboutMe, WorkExperience, Projects, Connect
   },
-
   data: () => ({
-    sideMenu: false,
     showMenu: false,
+    sideMenuStyle: 'display: block',
+    menuBtn: 'display: none',
     mainColumns: 10,
-    sideMenuOptions: [
-      { label: 'PROFILES', route: '/profiles' },
-      { label: 'GALLERY', route: '/' },
-      { label: 'CALENDAR', route: '/calendar' },
-      { label: 'CONTRIBUTE', route: '/contribute' },
-      { label: 'ABOUT US', route: '/about' }
-    ],
     sidePanel: [
       { label: 'about me', value: 'about' },
       { label: 'work experience', value: 'experience' },
@@ -106,16 +98,17 @@ export default {
     window.removeEventListener('resize', this.getWindowWidth);
   },
   methods: {
-    toggleSideMenu (screen) {
-      this.sideMenu = !this.sideMenu
-      console.log(screen)
-    },
     getWindowWidth() {
-      this.sideMenu = document.documentElement.clientWidth < 1300;
-      this.mainColumns = document.documentElement.clientWidth < 1300 ? 12: 10;
+      if (document.documentElement.clientWidth < 1300) {
+        this.sideMenuStyle = 'display: none'
+        this.menuBtn = 'display: block'
+      } else {
+        this.sideMenuStyle = 'display: block'
+        this.menuBtn = 'display: none'
+      }
+      this.mainColumns = document.documentElement.clientWidth < 1300 ? 12 : 10;
     },
     scrollTo (section) {
-      console.log('test')
       return { element: '#' + section, container: '#contentArea', offset: -12 }
     },
   }
@@ -155,7 +148,7 @@ export default {
     padding: 65px;
   }
   .subComponent {
-    min-height: 36vh;
+    min-height: 45vh;
     padding: 45px 65px;
   }
   .heading {

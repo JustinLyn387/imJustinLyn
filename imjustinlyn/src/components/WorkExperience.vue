@@ -63,7 +63,7 @@ export default {
                     'Managed the responsibility of the deployment of desktops and laptops for new and returning employees',
                     'Assisted Bell & CGI employees with various technical problems ranging from the installation of software to replacing device hardware'
                 ],
-                colour: 'error',
+                colour: 'red',
                 icon: 'mdi-account-details'
             },
             {

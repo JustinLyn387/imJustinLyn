@@ -4,8 +4,7 @@
             <v-col id="contentCol">
                 <h1 class="heading">About Me</h1>
                 <v-col>
-                    <v-row class="pt-12"><h4>•</h4><h2>Profile</h2></v-row>
-                    <v-row>
+                    <v-row class="pt-12">
                         <v-col style="text-align: center">
                             <h1 class="name">Justin Lyn</h1>
                             <h3>Computer Science Student</h3>
@@ -77,7 +76,7 @@ export default {
     }
     .bio {
         padding-top: 10%;
-        max-width: 725px;
+        max-width: 925px;
     }
     .name {
         color: #DC143C;

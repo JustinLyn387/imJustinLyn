@@ -2,75 +2,29 @@
     <v-container class="projectContainer">
         <v-row justify="center">
             <v-col id="contentCol">
+
                 <h1 class="heading">My Projects</h1>
-                <v-row class="pt-12">
-                    <v-col class="fullCol">
-                        <v-row style="min-height: 32vh">
-                            <v-col>
-                                <v-card color="orange" class="projectCard">
-                                    <p class="pt-4 pl-4 mb-0">VUE • GRAPHQL • EXPRESS • MONGOOSE</p>
-                                    <h1 class="pl-4">Cubing Cafe</h1>
-                                    <v-img class="projectImg" src="../assets/cubingcafe.png">
-                                        <v-btn class="viewBtn" href="https://github.com/No-Way-Jose/CubingCafe" target="_blank" color="#6495ED">View on Github</v-btn>
-                                    </v-img>
-                                </v-card>
-                            </v-col>
-                        </v-row>
-                        <v-row style="min-height: 42vh">
-                            <v-col class="halfCol">
-                                <v-card color="red" class="projectCard">
-                                    <p class="projectText pt-4 pl-4 mb-0">JAVA • MAVEN • HTML</p>
-                                    <h1 class="projectText pl-4">Kijiji Mapper</h1>
-                                    <v-img class="projectImg" src="../assets/kijijiCrawler.jpeg">
 
-                                    </v-img>
-                                    <v-btn class="viewBtn" href="https://github.com/JustinLyn387/Kijiji-Crawler-Assignment" target="_blank">View on Github</v-btn>
-                                </v-card>
+                <v-row class="pt-12 mt-8 px-5">
+                    <v-col v-for="(project, i) in projects" :key="i" lg="4" md="6" sm="12">
+                        <v-card class="projectCard" elevation="12">
+                            <v-col style="height: 100%">
+                                <v-row justify="center" class="pa-5" style="height: 55%">
+                                    <v-icon class="projectIcon" :color="project.colour">{{ project.icon }}</v-icon>
+                                </v-row>
+                                <v-row>
+                                    <v-col class="projectText">
+                                        <h1>{{ project.name }}</h1>
+                                        <p>{{ project.tech }}</p>
+                                        <p><b>Status: {{project.status }}</b></p>
+                                        <v-btn v-bind:color="project.colour" class="viewBtn" v-bind:href="project.link" target="_blank">View on Github</v-btn>
+                                    </v-col>
+                                </v-row>
                             </v-col>
-                            <v-col class="halfCol">
-                                <v-card color="blue" class="projectCard">
-                                    <p>VUE • PYTHON • SQL</p>
-                                    <h1>UTSC Course Tree</h1>
-                                    <v-btn class="viewBtn" href="https://github.com/JustinLyn387/utsc-coursetree" target="_blank">View on Github</v-btn>
-                                </v-card>
-                            </v-col>
-
-                        </v-row>
-                    </v-col>
-                    <v-col class="fullCol">
-                        <v-row style="min-height: 42vh">
-                            <v-col class="halfCol">
-                                <v-card color="pink" class="projectCard">
-                                    <p class="projectText pt-4 pl-4 mb-0">JAVA • ANGULAR • IBM WATSON</p>
-                                    <h1 class="projectText pl-4">DFI Chatbot</h1>
-                                    <v-img class="projectImg" src="../assets/chatbot.jpeg">
-                                        <v-btn class="viewBtn" href="https://github.com/JustinLyn387/CSCC01-Chatbot-Project" target="_blank">View on Github</v-btn>
-                                    </v-img>
-                                </v-card>
-                            </v-col>
-                            <v-col class="halfCol">
-                                <v-card color="green" class="projectCard">
-                                    <p class="projectText pt-4 pl-4 mb-0">JAVA</p>
-                                    <h1 class="projectText pl-4" >Terminal</h1>
-                                    <v-img class="projectImg" src="../assets/terminal.jpeg">
-                                        <v-btn class="viewBtn" href="https://github.com/JustinLyn387/Java-Mock-Terminal" target="_blank">View on Github</v-btn>
-                                    </v-img>
-                                </v-card>
-                            </v-col>
-                        </v-row>
-                        <v-row style="min-height: 32vh">
-                            <v-col>
-                                <v-card color="purple" class="projectCard">
-                                    <p class="projectText pt-4 pl-4 mb-0">VUE • PYTHON • NoSQL</p>
-                                    <h1 class="projectText pl-4">WatchedBox</h1>
-                                    <v-img class="projectImg" src="../assets/watchedbox.png">
-                                        <v-btn class="viewBtn" href="https://github.com/JustinLyn387/WatchedBox" target="_blank">View on Github</v-btn>
-                                    </v-img>
-                                </v-card>
-                            </v-col>
-                        </v-row>
+                        </v-card>
                     </v-col>
                 </v-row>
+
             </v-col>
         </v-row>
     </v-container>
@@ -78,37 +32,88 @@
 
 <script>
 export default {
-    name: 'Projects'
+    name: 'Projects',
+    data: () => ({
+        projects: [
+            {
+                name:'Cubing Cafe',
+                tech:'VUE • GRAPHQL • MONGOOSE',
+                link:'https://github.com/No-Way-Jose/CubingCafe',
+                status:'Online',
+                icon:'mdi-cube-scan',
+                colour:'orange'
+            },
+            {
+                name:'UTSC Course Tree',
+                tech:'VUE • PYTHON • SQL',
+                link:'https://github.com/JustinLyn387/utsc-coursetree',
+                status:'Development',
+                icon:'mdi-school-outline',
+                colour:'primary'
+            },
+            {
+                name:'Kijiji Mapper',
+                tech:'JAVA • MAVEN • HTML',
+                link:'https://github.com/JustinLyn387/Kijiji-Crawler-Assignment',
+                status:'Complete',
+                icon:'mdi-map-marker-multiple-outline',
+                colour:'#373373'
+            },
+            {
+                name:'DFI Chatbot',
+                tech:'JAVA • ANGULAR • IBM WATSON',
+                link:'https://github.com/JustinLyn387/CSCC01-Chatbot-Project',
+                status:'Complete',
+                icon:'mdi-chat-processing-outline',
+                colour:'blue'
+            },
+            {
+                name:'WatchedBox',
+                tech:'VUE • PYTHON • NoSQL',
+                link:'https://github.com/JustinLyn387/WatchedBox',
+                status:'Development',
+                icon:'mdi-drama-masks',
+                colour:'#C3073F'
+            },
+            {
+                name:'Terminal',
+                tech:'JAVA',
+                link:'https://github.com/JustinLyn387/Java-Mock-Terminal',
+                status:'Complete',
+                icon:'mdi-console',
+                colour:'#00AD28'
+            }
+        ]
+    })
 }
 </script>
 
 <style scoped>
     .projectContainer {
         min-width: 100%;
-        background-color: #121212;
+        background-color: #DC143C;
         color: #FFFFFF;
     }
     .projectCard {
-        height: 100%;
-        width: 100%;
+        height: 35vh;
+        min-width: 235px;
+        padding: 10px;
+        overflow-y: auto;
     }
-    .fullCol {
-        min-width: 385px;
+    .projectIcon {
+        font-size: 115px;
     }
-    .halfCol {
-        min-width: 225px;
+    .projectIcon:hover {
+        font-size: 145px;
     }
     .viewBtn {
-        position: absolute;
-        bottom: 20px;
-        margin-left: 20px;
+        color: #FFFFFF;
     }
     .projectImg {
         height: 70%;
     }
     .projectText {
-        color: #FFFFFF;
-        font-weight: bold;
+        text-align: center;
     }
 
 </style>
