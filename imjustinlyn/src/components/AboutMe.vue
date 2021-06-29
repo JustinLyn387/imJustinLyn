@@ -1,6 +1,8 @@
 <template>
     <v-container class="aboutContainer">
         <v-row justify="center">
+
+            <!-- Main content col sectioned into rows -->
             <v-col id="contentCol">
                 <h1 class="heading">About Me</h1>
                 <v-col>
@@ -10,7 +12,7 @@
                             <h3>Computer Science Student</h3>
                         </v-col>
                     </v-row>
-                    <v-row justify="center" class="pt-10">
+                    <v-row justify="center" align="center" class="pt-10">
                         <v-col cols="4" class="fullCol px-5">
                             <vue-diagonal :deg="2" background="#DC143C" class="picBack2"/>
                             <vue-diagonal :deg="-3" background="#181818" class="picBack1">
@@ -18,15 +20,15 @@
                             </vue-diagonal>
                             <vue-diagonal :deg="3" background="#DC143C"  class="picBack2"/>
                         </v-col>
-                        <v-col :cols="aboutColumn" class="bio">
-                            <p><b>I code, design, collaborate, and solve problems.</b> I love learning new concepts and technologies, and
+                        <v-col class="bio px-12">
+                            <p class="mb-0"><b>I code, design, collaborate, and solve problems.</b> I love learning new concepts and technologies, and
                             creating things that other people can use and share with others.<br><br>
                             My computer science career started back when I was in grade 11 and since attending the University of Toronto
                             in the fall of 2017, I have been narrowing down what path I want to pursue in the world of computer science.
                             I chose to study computer science after watching CSI Cyber and seeing how powerful technology and computers
                             can be and what they are capable of doing. Now in my 3rd year of studies, I’ve gained knowledge in various
                             concepts such as, design patterns, databases, data structures, software life cycles, and the design and
-                            operation of digital computers.<br><br></p>
+                            operation of digital computers.</p>
                         </v-col>
                     </v-row>
                     <v-row class="pt-12"><h4>•</h4><h2>Skills</h2></v-row>
@@ -50,7 +52,7 @@
                             <v-progress-linear value="65" height="8" rounded color="white"></v-progress-linear>
                         </v-col>
                     </v-row>
-                    <v-row justify="center" class="py-8">
+                    <v-row justify="center" class="pt-8">
                         <v-btn color="#DC143C" outlined large href="/Resume.pdf" target="_blank">View My Resume</v-btn>
                     </v-row>
                 </v-col>
@@ -68,7 +70,7 @@ export default {
 
 <style scoped>
     p {
-        font-size: 1.25em;
+        font-size: 1.1em;
     }
     h4 {
         color: #DC143C;
@@ -76,8 +78,8 @@ export default {
         padding-right: 10px;
     }
     .bio {
-        padding-top: 10%;
         max-width: 925px;
+        min-width: 450px;
     }
     .name {
         color: #DC143C;

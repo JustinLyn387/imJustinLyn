@@ -2,11 +2,11 @@
     <v-container class="projectContainer">
         <v-row justify="center">
             <v-col id="contentCol">
-
                 <h1 class="heading">My Projects</h1>
 
+                <!-- Row of project cards -->
                 <v-row class="pt-12">
-                    <v-col v-for="(project, i) in projects" :key="i" lg="4" md="6" sm="12">
+                    <v-col v-for="(project, i) in projects" :key="i" lg="4" md="6" xs="12">
                         <v-card class="projectCard pb-6" elevation="12">
                             <v-col style="height: 100%">
                                 <v-row justify="center" class="pa-5" style="height: 55%">
@@ -108,7 +108,7 @@ export default {
     }
     .projectCard {
         height: 35vh;
-        min-width: 235px;
+        min-width: 275px;
         padding: 10px;
         min-height: 400px;
     }
@@ -120,9 +120,6 @@ export default {
     }
     .viewBtn {
         color: #FFFFFF;
-    }
-    .projectImg {
-        height: 70%;
     }
     .projectText {
         text-align: center;

@@ -1,6 +1,8 @@
 <template>
     <v-container class="connectContainer">
         <v-row justify="center"><h1 class="heading">Let's Connect</h1></v-row>
+
+        <!-- Let's connect links and icons -->
         <v-row justify="center" align="center" class="connectRow">
             <v-col id="contentCol">
                 <v-row align="center" justify="center">
@@ -22,12 +24,24 @@
                 </v-row>
             </v-col>
         </v-row>
+
+        <!-- Footer section -->
+        <v-row v-bind:style="footerStyle" class="footerBar mt-2">
+            <v-row class="ma-0">
+                <v-col class="footerText" cols="10">
+                    <strong>Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
+                </v-col>
+            </v-row>
+        </v-row>
     </v-container>
 </template>
 
 <script>
 export default {
-    name: 'Connect'
+    name: 'Connect',
+    props: {
+        footerStyle: String
+    }
 }
 </script>
 
@@ -41,10 +55,10 @@ export default {
         min-width: 100%;
         background-color: #121212;
         color: #FFFFFF;
-        padding-bottom: 25px;
     }
     .connectRow {
-        min-height: 30vh;
+        min-height: calc(30vh + 50px);
+        padding: 0 65px;
     }
     .connectCol {
         text-align: center;
@@ -59,6 +73,16 @@ export default {
         font-size: 1.25em;
         font-weight: bold;
         padding-top: 10px;
+    }
+    .footerBar{
+        height: 50px;
+        background-color: #181818;
+    }
+    .footerText{
+        color: white;
+        text-align: center;
+        min-width: 100%;
+        margin: 0;
     }
 
 </style>

@@ -5,6 +5,8 @@
                 <v-row justify="center" class="pb-8">
                     <h1 class="heading">Work Experience</h1>
                 </v-row>
+
+                <!-- Work experience timeline -->
                 <v-timeline v-bind:dense="smallScreen" class="timeline">
                     <v-timeline-item v-for="(job, i) in experience" :key="i" :icon="job.icon" :color="job.colour" fill-dot>
                         <template v-slot:opposite>
