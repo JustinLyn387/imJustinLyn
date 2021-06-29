@@ -24,6 +24,8 @@
           <AboutMe id="about" class="component" :aboutColumn="aboutColumn"/>
           <!-- Work experience component -->
           <WorkExperience id="experience" class="component"/>
+          <!-- Education component -->
+          <Education id="education" class="component" :resolution="resolution"/>
           <!-- My projects component -->
           <Projects id="projects" class="component"/>
           <!-- Lets connect component -->
@@ -40,22 +42,25 @@
 import Homepage from './components/Homepage';
 import AboutMe from './components/AboutMe';
 import WorkExperience from './components/WorkExperience';
+import Education from './components/Education';
 import Projects from './components/Projects';
 import Connect from './components/Connect';
 
 export default {
   name: 'App',
   components: {
-    Homepage, AboutMe, WorkExperience, Projects, Connect
+    Homepage, AboutMe, WorkExperience, Education, Projects, Connect
   },
   data: () => ({
     fullScreenMenu: 'display: block',
     dynamicStyle: 'display: none',
+    resolution: 0,
     mainColumns: 10,
     aboutColumn: 8,
     sidePanel: [
       { label: 'about me', value: 'about' },
       { label: 'work experience', value: 'experience' },
+      { label: 'education', value: 'education' },
       { label: 'projects', value: 'projects' },
       { label: 'connect', value: 'connect' }
     ]
@@ -71,7 +76,8 @@ export default {
   },
   methods: {
     getWindowWidth() {
-      if (document.documentElement.clientWidth < 1300) {
+      this.resolution = document.documentElement.clientWidth
+      if (this.resolution < 1300) {
         this.fullScreenMenu = 'display: none'
         this.dynamicStyle = 'display: block'
         this.mainColumns = 12
@@ -135,7 +141,6 @@ export default {
     padding: 60% 25px 0 0;
   }
   .component {
-    min-height: 101vh;
     padding: 8vh 55px;
   }
   .subComponent {

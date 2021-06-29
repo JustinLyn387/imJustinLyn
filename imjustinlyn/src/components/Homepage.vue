@@ -91,7 +91,7 @@ export default {
         max-width: 100%;
         overflow-y: hidden;
         overflow-x: hidden;
-        height: 100vh;
+        height: 101vh;
         background-color: #FFFFFF;
     }
     section {

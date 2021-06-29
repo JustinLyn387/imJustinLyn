@@ -58,7 +58,7 @@ export default {
     }
     .connectRow {
         min-height: calc(30vh + 50px);
-        padding: 0 65px;
+        padding: 0 65px 35px 65px;
     }
     .connectCol {
         text-align: center;
