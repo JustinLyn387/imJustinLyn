@@ -1,9 +1,9 @@
 <template>
     <v-container class="connectContainer">
-        <v-row justify="center" class="connectRow">
+        <v-row justify="center"><h1 class="heading">Let's Connect</h1></v-row>
+        <v-row justify="center" align="center" class="connectRow">
             <v-col id="contentCol">
-                <h1 class="heading mb-12">Let's Connect</h1>
-                <v-row class="pt-12">
+                <v-row align="center" justify="center">
                     <v-col class="connectCol">
                         <v-icon class="connectIcon">mdi-linkedin</v-icon>
                         <p class="subHead">Let's Connect</p>
@@ -41,9 +41,10 @@ export default {
         min-width: 100%;
         background-color: #121212;
         color: #FFFFFF;
+        padding-bottom: 25px;
     }
     .connectRow {
-        min-height: 100%;
+        min-height: 30vh;
     }
     .connectCol {
         text-align: center;

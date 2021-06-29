@@ -1,8 +1,10 @@
 <template>
     <v-container class="workContainer">
         <v-row justify="center">
-            <v-col id="contentCol">
-                <h1 class="heading">Work Experience</h1>
+            <v-col id="contentCol" class="pb-0">
+                <v-row justify="center" class="pb-8">
+                    <h1 class="heading">Work Experience</h1>
+                </v-row>
                 <v-timeline v-bind:dense="smallScreen" class="timeline">
                     <v-timeline-item v-for="(job, i) in experience" :key="i" :icon="job.icon" :color="job.colour" fill-dot>
                         <template v-slot:opposite>
@@ -15,7 +17,7 @@
                             <h2 v-if="!smallScreen" :class="`headline font-weight-bold mb-4 ${job.colour}--text`">{{ job.company }}</h2>
                             <h2 v-else :class="`headline font-weight-bold mb-4 ${job.colour}--text`" class="pb-0">{{ job.position }}</h2>
                             <p v-if="smallScreen" :class="`font-weight-light ${job.colour}--text`">{{ job.company}} • {{ job.time }}</p>
-                            <div v-for="(role, i) in job.role" :key="i"> ○ {{ role }}</div>
+                            <div v-for="(role, i) in job.role" :key="i"> • {{ role }}</div>
                         </div>
                     </v-timeline-item>
                 </v-timeline>

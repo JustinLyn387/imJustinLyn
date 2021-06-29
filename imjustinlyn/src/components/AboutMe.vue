@@ -4,7 +4,7 @@
             <v-col id="contentCol">
                 <h1 class="heading">About Me</h1>
                 <v-col>
-                    <v-row class="pt-12">
+                    <v-row class="pt-10">
                         <v-col style="text-align: center">
                             <h1 class="name">Justin Lyn</h1>
                             <h3>Computer Science Student</h3>
@@ -18,7 +18,7 @@
                             </vue-diagonal>
                             <vue-diagonal :deg="3" background="#DC143C"  class="picBack2"/>
                         </v-col>
-                        <v-col cols="8" class="bio">
+                        <v-col :cols="aboutColumn" class="bio">
                             <p><b>I code, design, collaborate, and solve problems.</b> I love learning new concepts and technologies, and
                             creating things that other people can use and share with others.<br><br>
                             My computer science career started back when I was in grade 11 and since attending the University of Toronto
@@ -61,7 +61,8 @@
 
 <script>
 export default {
-    name: 'AboutMe'
+    name: 'AboutMe',
+    props: ['aboutColumn']
 }
 </script>
 
@@ -90,9 +91,6 @@ export default {
     }
     .fullCol {
         min-width: 335px;
-    }
-    .tripleCol {
-        min-width: 225px;
     }
     .picBack1{
         padding: 15px;

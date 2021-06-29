@@ -21,7 +21,7 @@
         </v-container>
       </v-dialog>
 
-      <v-row>
+      <v-row class="ma-0 pa-0">
         <v-col v-bind:style="sideMenuStyle" cols="2" style="height: 101vh; background-color: #181818; color: white">
           <v-row justify="center" class="pt-12">
             <v-flex class="heading logo" v-scroll-to="scrollTo('home')">iJL</v-flex>
@@ -38,7 +38,7 @@
           <!-- Homepage component -->
           <Homepage id="home" class="component" style="position: relative"/>
           <!-- About me component -->
-          <AboutMe id="about" class="component"/>
+          <AboutMe id="about" class="component" :aboutColumn="aboutColumn"/>
           <!-- Work experience component -->
           <WorkExperience id="experience" class="component"/>
           <!-- My projects component -->
@@ -81,6 +81,7 @@ export default {
     sideMenuStyle: 'display: block',
     menuBtn: 'display: none',
     mainColumns: 10,
+    aboutColumn: 8,
     sidePanel: [
       { label: 'about me', value: 'about' },
       { label: 'work experience', value: 'experience' },
@@ -102,11 +103,14 @@ export default {
       if (document.documentElement.clientWidth < 1300) {
         this.sideMenuStyle = 'display: none'
         this.menuBtn = 'display: block'
+        this.mainColumns = 12
+        this.aboutColumn = 11
       } else {
         this.sideMenuStyle = 'display: block'
         this.menuBtn = 'display: none'
+        this.mainColumns = 10
+        this.aboutColumn = 8
       }
-      this.mainColumns = document.documentElement.clientWidth < 1300 ? 12 : 10;
     },
     scrollTo (section) {
       return { element: '#' + section, container: '#contentArea', offset: -12 }
@@ -145,20 +149,20 @@ export default {
   }
   .component {
     min-height: 101vh;
-    padding: 65px;
+    padding: 8vh 55px;
   }
   .subComponent {
     min-height: 45vh;
-    padding: 45px 65px;
+    padding: 8vh 65px;
   }
   .heading {
     width: fit-content;
     font-family: 'Ramabhadra', sans-serif;
     font-weight: bolder;
-    font-size: 40px;
+    font-size: 2.25em;
     padding-bottom: 10px;
     background: linear-gradient(#DC143C, transparent) bottom /var(--d, 35%) 4px no-repeat;
-    transition:0.5s;
+    transition: 0.5s;
   }
   .heading:hover {
     --d: 85%;

@@ -15,7 +15,7 @@
         <v-row class="homeText">
             <v-col class="py-0 homeColumn">
                 <h1 style="font-size: 7em">Justin? WHO?</h1>
-                <h2>Hey there! Welcome to my website where<br> you can find out a little bit more about who I am ...</h2>
+                <h2>Hey there! Welcome to my website where you can find out a little bit more about who I am ...</h2>
             </v-col>
         </v-row>
     </v-container>
@@ -79,6 +79,12 @@ export default {
         transition: background-color 1s;
         z-index: 5;
     }
+    h1, h2 {
+        padding-right: 25px;
+    }
+    h2 {
+        max-width: 600px;
+    }
     .homeText {
         left: 12%;
         opacity: 0;
@@ -86,7 +92,6 @@ export default {
         color: #181818;
         bottom: 20vh;
         height: fit-content;
-
     }
     .homeColumn{
         height: fit-content;

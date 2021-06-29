@@ -5,9 +5,9 @@
 
                 <h1 class="heading">My Projects</h1>
 
-                <v-row class="pt-12 mt-8 px-5">
+                <v-row class="pt-12">
                     <v-col v-for="(project, i) in projects" :key="i" lg="4" md="6" sm="12">
-                        <v-card class="projectCard" elevation="12">
+                        <v-card class="projectCard pb-6" elevation="12">
                             <v-col style="height: 100%">
                                 <v-row justify="center" class="pa-5" style="height: 55%">
                                     <v-icon class="projectIcon" :color="project.colour">{{ project.icon }}</v-icon>
@@ -44,7 +44,7 @@ export default {
                 colour:'orange'
             },
             {
-                name:'UTSC Course Tree',
+                name:'Course Tree',
                 tech:'VUE • PYTHON • SQL',
                 link:'https://github.com/JustinLyn387/utsc-coursetree',
                 status:'Development',
@@ -94,11 +94,23 @@ export default {
         background-color: #DC143C;
         color: #FFFFFF;
     }
+    .heading {
+        width: fit-content;
+        font-family: 'Ramabhadra', sans-serif;
+        font-weight: bolder;
+        font-size: 40px;
+        padding-bottom: 10px;
+        background: linear-gradient(#181818, transparent) bottom /var(--d, 35%) 4px no-repeat;
+        transition:0.5s;
+    }
+    .heading:hover {
+        --d: 85%;
+    }
     .projectCard {
         height: 35vh;
         min-width: 235px;
         padding: 10px;
-        overflow-y: auto;
+        min-height: 400px;
     }
     .projectIcon {
         font-size: 115px;
