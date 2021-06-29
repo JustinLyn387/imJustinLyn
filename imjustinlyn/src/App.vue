@@ -21,7 +21,7 @@
         </v-container>
       </v-dialog>
 
-      <v-row class="ma-0 pa-0">
+      <v-row class="mb-0">
         <v-col v-bind:style="sideMenuStyle" cols="2" style="height: 101vh; background-color: #181818; color: white">
           <v-row justify="center" class="pt-12">
             <v-flex class="heading logo" v-scroll-to="scrollTo('home')">iJL</v-flex>
