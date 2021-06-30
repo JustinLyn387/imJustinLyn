@@ -12,7 +12,7 @@
                     <v-row>
                         <v-col>
                             <v-row v-for="(option, i) in menuOptions" :key="i" justify="center">
-                                <v-flex class="menuOption" v-scroll-to="scrollTo(option.value)" @click="showMenu = !showMenu">{{ option.label }}</v-flex>
+                                <v-flex class="menuOption" :style="themeColour" v-scroll-to="scrollTo(option.value)" @click="showMenu = !showMenu">{{ option.label }}</v-flex>
                             </v-row>
                         </v-col>
                     </v-row>
@@ -40,44 +40,39 @@ export default {
     name: 'Homepage',
     data: () => ({
         showMenu: false,
+        tl: null
     }),
     props: {
         menuStyle: String,
-        menuOptions: Array
+        menuOptions: Array,
+        accentColour: String
+    },
+    watch: {
+      accentColour () {
+          // Reset animation settings and play again
+          anime({ targets: 'section', scaleY: '1', scaleX: '1', translateX: 0, rotate: 0, duration: 0, delay: 0 })
+          anime({ targets: 'section', scaleY: '2.5', scaleX: '2.5', translateX: '52%', rotate: '45deg', duration: 5000, delay: 2000 })
+          this.createAnimation()
+      }
+    },
+    computed: {
+        themeColour () {
+            return { '--accent-colour': this.accentColour }
+        }
     },
     mounted () {
-        const tl = anime.timeline({
-            easing: 'easeOutExpo',
-            duration: 750
-        })
-        tl.add({
-            targets: 'section div',
-            width: '100%',
-            backgroundColor: '#DC143C',
-            delay: anime.stagger(100) // increase delay by 100ms for each elements.
-        })
-            .add({
-                targets: 'section div',
-                width: '90%',
-                backgroundColor: '#DC143C'
-            })
-            .add({
-                targets: '.homeText',
-                opacity: 1,
-                duration: 4000
-            }, '-=500')
-        anime({
-            targets: 'section',
-            scaleY: '2.5',
-            scaleX: '2.5',
-            translateX: '52%',
-            rotate: '45deg',
-            duration: 5000,
-            delay: 2000
-
-        })
+        this.createAnimation()
     },
     methods: {
+        createAnimation () {
+            // Animation settings
+            anime({ targets: 'section', scaleY: '2.5', scaleX: '2.5', translateX: '52%', rotate: '45deg', duration: 5000, delay: 2000 })
+
+            this.tl = anime.timeline({ easing: 'easeOutExpo', duration: 750 })
+            this.tl.add({ targets: 'section div', width: '100%', backgroundColor: this.accentColour, delay: anime.stagger(100) })
+                .add({ targets: 'section div', width: '90%', backgroundColor: this.accentColour })
+                .add({ targets: '.homeText', opacity: 1, duration: 4000 }, '-=500')
+        },
         scrollTo (section) {
             return { element: '#' + section, container: '#contentArea', offset: -12 }
         }
@@ -124,7 +119,7 @@ export default {
     }
     .menu{
         min-width: 100%;
-        min-height: 102vh;
+        min-height: 100vh;
         background-color: #181818;
     }
     .menuBtn {
@@ -145,7 +140,7 @@ export default {
     }
     .menuOption:hover{
         font-family: 'Varela Round', sans-serif;
-        color: #DC143C;
+        color: var(--accent-colour);
         cursor: pointer;
     }
     .menuRow{

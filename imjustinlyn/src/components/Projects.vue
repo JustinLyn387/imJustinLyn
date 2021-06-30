@@ -1,11 +1,11 @@
 <template>
-    <v-container class="projectContainer">
+    <v-container class="projectContainer" :style="themeColour">
         <v-row justify="center">
             <v-col id="contentCol">
                 <h1 class="heading">My Projects</h1>
 
                 <!-- Row of project cards -->
-                <v-row class="pt-12">
+                <v-row class="pt-12 pb-4">
                     <v-col v-for="(project, i) in projects" :key="i" lg="4" md="6" xs="12">
                         <v-card class="projectCard pb-6" elevation="12">
                             <v-col style="height: 100%">
@@ -33,6 +33,14 @@
 <script>
 export default {
     name: 'Projects',
+    props: {
+        accentColour: String
+    },
+    computed: {
+        themeColour () {
+            return { '--accent-colour': this.accentColour }
+        }
+    },
     data: () => ({
         projects: [
             {
@@ -91,7 +99,7 @@ export default {
 <style scoped>
     .projectContainer {
         min-width: 100%;
-        background-color: #DC143C;
+        background-color: var(--accent-colour);
         color: #FFFFFF;
     }
     .heading {

@@ -3,7 +3,7 @@
         <v-row justify="center">
             <v-col id="contentCol" class="pb-0">
                 <v-row justify="center" class="pb-8">
-                    <h1 class="heading">Work Experience</h1>
+                    <h1 class="heading" :style="underlineColour">Work Experience</h1>
                 </v-row>
 
                 <!-- Work experience timeline -->
@@ -31,6 +31,9 @@
 <script>
 export default {
     name: 'WorkExperience',
+    props: {
+        accentColour: String
+    },
     data: () => ({
         smallScreen: false,
         experience: [
@@ -104,6 +107,12 @@ export default {
     },
     beforeDestroy() {
         window.removeEventListener('resize', this.getWindowWidth);
+    },
+    computed: {
+        underlineColour () {
+            console.log(`${this.headingUnderline}`)
+            return { '--underline-colour': `linear-gradient(${this.accentColour}, transparent) bottom /var(--d, 35%) 4px no-repeat` }
+        }
     },
     methods: {
         getWindowWidth() {

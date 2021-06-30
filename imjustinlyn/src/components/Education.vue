@@ -2,15 +2,15 @@
     <v-container class="educationContainer">
         <v-row justify="center">
             <v-col id="contentCol" class="alignData">
-                <h1 class="heading">Education</h1>
+                <h1 class="heading" :style="underlineColour">Education</h1>
                 <v-row justify="center" class="pa-12"><v-img src="../assets/utsc.png" contain max-width="325px"/></v-row>
                 <h3>4th year • May 2021</h3>
-                <h5><b>BSc in Computer Science, Mathematics, Statistics</b></h5>
+                <h5 :style="themeColour"><b>BSc in Computer Science, Mathematics, Statistics</b></h5>
                 <h3>Information Systems Specialist</h3>
 
                 <!-- Data table of courses -->
                 <v-row class="py-6 px-4 mt-12">
-                    <v-row class="py-6"><h5>•</h5><h2>Relevant Courses</h2></v-row>
+                    <v-row class="py-6"><h5 :style="themeColour">•</h5><h2>Relevant Courses</h2></v-row>
                     <v-data-table :headers="headerValues" :items="education" :expanded.sync="expanded" :show-expand="showExpand"
                                   item-key="name" class="courseTable" single-expand hide-default-footer dark
                     >
@@ -37,7 +37,27 @@
 export default {
     name: 'Education',
     props: {
-        resolution: Number
+        resolution: Number,
+        accentColour: String
+    },
+    computed: {
+        headerValues () {
+            if (this.resolution > 600) {
+                return this.educationHeaders
+            } else {
+                return this.educationHeaders.slice(0, -1)
+            }
+        },
+        showExpand () {
+            return this.resolution > 600
+        },
+        themeColour () {
+            return { '--accent-colour': this.accentColour }
+        },
+        underlineColour () {
+            console.log(`${this.headingUnderline}`)
+            return { '--underline-colour': `linear-gradient(${this.accentColour}, transparent) bottom /var(--d, 35%) 4px no-repeat` }
+        }
     },
     data: () => ({
         expanded: [],
@@ -141,19 +161,7 @@ export default {
                 taken: '2018 • Winter'
             }
         ]
-    }),
-    computed: {
-        headerValues: function () {
-            if (this.resolution > 600) {
-                return this.educationHeaders
-            } else {
-                return this.educationHeaders.slice(0, -1)
-            }
-        },
-        showExpand: function () {
-            return this.resolution > 600
-        }
-    }
+    })
 }
 </script>
 
@@ -174,7 +182,7 @@ export default {
         justify-content: center;
     }
     h5 {
-        color: #DC143C;
+        color: var(--accent-colour);
         font-size: 1.65em;
         padding-right: 10px;
     }

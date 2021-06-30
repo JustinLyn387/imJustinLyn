@@ -6,30 +6,44 @@
         <!-- Side navigation menu for larger resolution screens-->
         <v-col v-bind:style="fullScreenMenu" cols="2" class="fullScreenMenu">
           <v-row justify="center" class="pt-12">
-            <v-flex class="heading logo" v-scroll-to="scrollTo('home')">iJL</v-flex>
+            <v-flex class="heading logo" :style="underlineColour" v-scroll-to="scrollTo('home')">iJL</v-flex>
           </v-row>
           <v-row>
             <v-col class="fullScreenMenuCol">
-              <v-flex v-for="(item, i) in sidePanel" :key="i" class="sideOptions" v-scroll-to="scrollTo(item.value)">{{ item.label }}</v-flex>
+              <v-flex v-for="(item, i) in sidePanel" :key="i" class="sideOptions" :style="themeColour" v-scroll-to="scrollTo(item.value)">{{ item.label }}</v-flex>
             </v-col>
+          </v-row>
+          <v-row justify="center" class="colourBtn">
+            <v-icon color="#FFFFFF" @click="showColours = !showColours">mdi-zodiac-gemini</v-icon>
           </v-row>
           <strong class="credits">Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
         </v-col>
 
+        <v-dialog v-model="showColours" fullscreen persistent transition="v-scroll-y-transition">
+          <v-container class="colourScreen pt-5">
+            <v-row justify="start" class="pl-3">
+              <v-btn outlined @click="updateAccentColour" color="#FFFFFF" class="closeBtn"><v-icon>mdi-close</v-icon></v-btn>
+            </v-row>
+            <v-row class="colourRow mt-0">
+              <v-color-picker class="ma-2" show-swatches dark mode="hexa" dot-size="15" width="500" canvas-height="400" hide-mode-switch v-model="newColour"></v-color-picker>
+            </v-row>
+          </v-container>
+        </v-dialog>
+
         <!-- Main content area -->
         <v-col id="contentArea" :cols="mainColumns" class="pl-0">
           <!-- Homepage component -->
-          <Homepage id="home" class="component relativeClass" :menuStyle="dynamicStyle" :menuOptions="sidePanel"/>
+          <Homepage id="home" class="component relativeClass" :menuStyle="dynamicStyle" :menuOptions="sidePanel" :accentColour="accentColour"/>
           <!-- About me component -->
-          <AboutMe id="about" class="component" :aboutColumn="aboutColumn"/>
+          <AboutMe id="about" class="component" :aboutColumn="aboutColumn" :accentColour="accentColour"/>
           <!-- Work experience component -->
-          <WorkExperience id="experience" class="component"/>
+          <WorkExperience id="experience" class="component" :accentColour="accentColour"/>
           <!-- Education component -->
-          <Education id="education" class="component" :resolution="resolution"/>
+          <Education id="education" class="component" :resolution="resolution" :accentColour="accentColour"/>
           <!-- My projects component -->
-          <Projects id="projects" class="component"/>
+          <Projects id="projects" class="component" :accentColour="accentColour"/>
           <!-- Lets connect component -->
-          <Connect id="connect" class="subComponent" :footerStyle="dynamicStyle"/>
+          <Connect id="connect" class="subComponent" :footerStyle="dynamicStyle" :accentColour="accentColour"/>
         </v-col>
       </v-row>
 
@@ -52,11 +66,15 @@ export default {
     Homepage, AboutMe, WorkExperience, Education, Projects, Connect
   },
   data: () => ({
+    accentColour: '#DC143C',
+    newColour: '#DC143C',
+    headingUnderline: `linear-gradient(#DC143C, transparent) bottom /var(--d, 35%) 4px no-repeat`,
     fullScreenMenu: 'display: block',
     dynamicStyle: 'display: none',
     resolution: 0,
     mainColumns: 10,
     aboutColumn: 8,
+    showColours: false,
     sidePanel: [
       { label: 'about me', value: 'about' },
       { label: 'work experience', value: 'experience' },
@@ -73,6 +91,14 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.getWindowWidth);
+  },
+  computed: {
+    themeColour () {
+      return { '--accent-colour': this.accentColour }
+    },
+    underlineColour () {
+      return { '--underline-colour': `linear-gradient(${this.accentColour}, transparent) bottom /var(--d, 35%) 4px no-repeat` }
+    }
   },
   methods: {
     getWindowWidth() {
@@ -92,6 +118,11 @@ export default {
     scrollTo (section) {
       return { element: '#' + section, container: '#contentArea', offset: -12 }
     },
+    updateAccentColour () {
+      this.showColours = !this.showColours
+      this.headingUnderline = 'linear-gradient(' + this.newColour + ', transparent) bottom /var(--d, 35%) 4px no-repeat'
+      this.accentColour = this.newColour
+    }
   }
 }
 </script>
@@ -128,7 +159,7 @@ export default {
     padding-bottom: 10px;
   }
   .sideOptions:hover {
-    color: #DC143C;
+    color: var(--accent-colour);
     cursor: pointer;
   }
   .fullScreenMenu {
@@ -153,7 +184,7 @@ export default {
     font-weight: bolder;
     font-size: 2.25em;
     padding-bottom: 10px;
-    background: linear-gradient(#DC143C, transparent) bottom /var(--d, 35%) 4px no-repeat;
+    background: var(--underline-colour);
     transition: 0.5s;
   }
   .heading:hover {
@@ -162,8 +193,32 @@ export default {
   .credits {
     position: absolute;
     bottom: 15px;
-    padding-left: 20px;
+    padding-left: 1.5%;
     font-size: 0.65vw;
+  }
+  .colourRow{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-46%, -50%);
+  }
+  .colourScreen {
+    min-width: 100%;
+    min-height: 100vh;
+    background-color: #181818;
+  }
+  .colourBtn {
+    position: absolute;
+    bottom: 65px;
+    padding-left: 7.5%;
+  }
+  .closeBtn {
+    font-size: xx-large;
+    color: #FFFFFF;
+    margin: 25px;
+  }
+  .theme--dark.v-color-picker {
+    background-color: #181818;
   }
 
 </style>

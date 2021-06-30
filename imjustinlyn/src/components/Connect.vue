@@ -1,6 +1,6 @@
 <template>
     <v-container class="connectContainer">
-        <v-row justify="center"><h1 class="heading">Let's Connect</h1></v-row>
+        <v-row justify="center"><h1 class="heading" :style="underlineColour">Let's Connect</h1></v-row>
 
         <!-- Let's connect links and icons -->
         <v-row justify="center" align="center" class="connectRow">
@@ -8,17 +8,17 @@
                 <v-row align="center" justify="center">
                     <v-col class="connectCol">
                         <v-icon class="connectIcon">mdi-linkedin</v-icon>
-                        <p class="subHead">Let's Connect</p>
+                        <p class="subHead" :style="themeColour">Let's Connect</p>
                         <a href="https://www.linkedin.com/in/justin-lyn-b9626114b/" target="_blank">Linkedin Profile</a>
                     </v-col>
                     <v-col class="connectCol">
                         <v-icon class="connectIcon">mdi-email-outline</v-icon>
-                        <p class="subHead">Email Me At</p>
+                        <p class="subHead" :style="themeColour">Email Me At</p>
                         <a href="mailto:justin.lyn@mail.utoronto.ca">justin.lyn@mail.utoronto.ca</a>
                     </v-col>
                     <v-col class="connectCol">
                         <v-icon class="connectIcon">mdi-facebook</v-icon>
-                        <p class="subHead">Let's Be Friends</p>
+                        <p class="subHead" :style="themeColour">Let's Be Friends</p>
                         <a href="https://www.facebook.com/Justinlyn387/" target="_blank">Facebook Page</a>
                     </v-col>
                 </v-row>
@@ -40,8 +40,18 @@
 export default {
     name: 'Connect',
     props: {
-        footerStyle: String
-    }
+        footerStyle: String,
+        accentColour: String
+    },
+    computed: {
+        themeColour () {
+            return { '--accent-colour': this.accentColour }
+        },
+        underlineColour () {
+            console.log(`${this.headingUnderline}`)
+            return { '--underline-colour': `linear-gradient(${this.accentColour}, transparent) bottom /var(--d, 35%) 4px no-repeat` }
+        }
+    },
 }
 </script>
 
@@ -69,7 +79,7 @@ export default {
         font-size: 55px;
     }
     .subHead {
-        color: #DC143C;
+        color: var(--accent-colour);
         font-size: 1.25em;
         font-weight: bold;
         padding-top: 10px;
