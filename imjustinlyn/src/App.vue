@@ -14,7 +14,7 @@
             </v-col>
           </v-row>
           <v-row justify="center" class="colourBtn">
-            <v-icon color="#FFFFFF" @click="showColours = !showColours">mdi-zodiac-gemini</v-icon>
+            <v-icon :color="accentColour" @click="showColours = !showColours">mdi-zodiac-gemini</v-icon>
           </v-row>
           <strong class="credits">Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
         </v-col>

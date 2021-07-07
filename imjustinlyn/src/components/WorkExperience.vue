@@ -110,7 +110,6 @@ export default {
     },
     computed: {
         underlineColour () {
-            console.log(`${this.headingUnderline}`)
             return { '--underline-colour': `linear-gradient(${this.accentColour}, transparent) bottom /var(--d, 35%) 4px no-repeat` }
         }
     },
