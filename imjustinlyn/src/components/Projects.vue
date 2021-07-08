@@ -5,8 +5,8 @@
                 <h1 class="heading">My Projects</h1>
 
                 <!-- Row of project cards -->
-                <v-row class="pt-12 pb-4">
-                    <v-col v-for="(project, i) in projects" :key="i" lg="4" md="6" xs="12">
+                <v-row class="pt-12 pb-4" justify="center">
+                    <v-col v-for="(project, i) in projects" :key="i" lg="4" md="6" xs="12" class="projCol">
                         <v-card class="projectCard pb-6" elevation="12">
                             <v-col style="height: 100%">
                                 <v-row justify="center" class="pa-5" style="height: 55%">
@@ -114,9 +114,12 @@ export default {
     .heading:hover {
         --d: 85%;
     }
+    .projCol {
+        padding: 10px 20px;
+    }
     .projectCard {
         height: 35vh;
-        min-width: 275px;
+        min-width: 285px;
         padding: 10px;
         min-height: 400px;
     }
