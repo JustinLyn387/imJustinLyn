@@ -9,10 +9,11 @@
                 <h3>Information Systems Specialist</h3>
 
                 <!-- Data table of courses -->
-                <v-row class="py-6 px-4 mt-12">
+                <v-row class="py-6 px-0 mt-12">
                     <v-row class="py-6"><h5 :style="themeColour">•</h5><h2>Relevant Courses</h2></v-row>
                     <v-data-table :headers="headerValues" :items="education" :expanded.sync="expanded" :show-expand="showExpand"
                                   item-key="name" class="courseTable" single-expand hide-default-footer dark
+                                  :disable-sort="!showExpand"
                     >
                         <!-- Templates for custom CSS on whatever columns -->
                         <template v-slot:item.course="{ item }">
@@ -45,7 +46,7 @@ export default {
             if (this.resolution > 600) {
                 return this.educationHeaders
             } else {
-                return this.educationHeaders.slice(0, -1)
+                return this.educationHeaders.slice(1, -2)
             }
         },
         showExpand () {

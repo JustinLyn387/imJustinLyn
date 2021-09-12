@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <v-row class="mb-0 mx-0">
+      <v-row class="ma-0">
 
         <!-- Side navigation menu for larger resolution screens-->
         <v-col v-bind:style="fullScreenMenu" cols="2" class="fullScreenMenu">
@@ -131,12 +131,12 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap');
 
   #contentCol {
-    max-width: 1298px;
+    max-width: 1200px;
   }
   #contentArea {
     padding: 0;
     margin: 0;
-    height: 101vh;
+    height: 100vh;
     overflow-y: auto;
     overflow-x: hidden
   }
@@ -163,7 +163,7 @@ export default {
     cursor: pointer;
   }
   .fullScreenMenu {
-    height: 101vh;
+    height: 100vh;
     background-color: #181818;
     color: #FFFFFF
   }
@@ -172,11 +172,13 @@ export default {
     padding: 60% 25px 0 0;
   }
   .component {
-    padding: 8vh 55px;
+    padding: 8vh 50px;
+    overflow: hidden;
   }
   .subComponent {
     min-height: 45vh;
     padding: 8vh 0 0 0;
+    overflow: hidden;
   }
   .heading {
     width: fit-content;

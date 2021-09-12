@@ -26,11 +26,9 @@
         </v-row>
 
         <!-- Footer section -->
-        <v-row v-bind:style="footerStyle" class="footerBar mt-2">
-            <v-row class="ma-0">
-                <v-col class="footerText" cols="10">
-                    <strong>Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
-                </v-col>
+        <v-row v-bind:style="footerStyle" class="footerBar ma-0">
+            <v-row justify="center" class="white--text pa-3">
+              <strong>Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
             </v-row>
         </v-row>
     </v-container>
@@ -86,12 +84,6 @@ export default {
     .footerBar{
         height: 50px;
         background-color: #181818;
-    }
-    .footerText{
-        color: white;
-        text-align: center;
-        min-width: 100%;
-        margin: 0;
     }
 
 </style>

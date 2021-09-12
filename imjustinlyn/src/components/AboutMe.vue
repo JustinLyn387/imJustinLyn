@@ -12,15 +12,11 @@
                             <h3>Computer Science Student</h3>
                         </v-col>
                     </v-row>
-                    <v-row justify="center" align="center" class="pt-10">
-                        <v-col cols="4" class="fullCol px-5">
-                            <vue-diagonal :deg="2" :background="this.accentColour" class="picBack2"/>
-                            <vue-diagonal :deg="-3" background="#181818" class="picBack1">
-                                <img src="../assets/profilePic.jpeg" class="mt-2">
-                            </vue-diagonal>
-                            <vue-diagonal :deg="3" :background="this.accentColour"  class="picBack2"/>
+                    <v-row justify="center" align="center" class="pt-2">
+                        <v-col cols="4" class="fullCol justify-center shrink">
+                          <img src="../assets/profilePic.jpg" class="mt-2 profilePic" :style="themeColour">
                         </v-col>
-                        <v-col class="bio px-12">
+                        <v-col class="bio px-12 grow">
                             <p class="mb-0"><b>I code, design, collaborate, and solve problems.</b> I love learning new concepts and technologies, and
                             creating things that other people can use and share with others.<br><br>
                             My computer science career started back when I was in grade 11 and since attending the University of Toronto
@@ -102,7 +98,8 @@ export default {
         color: #FFFFFF;
     }
     .fullCol {
-        min-width: 335px;
+        min-width: 290px;
+        text-align: center;
     }
     .picBack1{
         padding: 15px;
@@ -112,10 +109,13 @@ export default {
         height: 2.3vh;
     }
     img {
-        max-width: 100%;
+        max-width: 250px;
         height: auto;
         width: auto\9;
         image-orientation: from-image;
+        border-radius: 50%;
+        border: 5px solid;
+        border-color: var(--accent-colour);
     }
 
 </style>
