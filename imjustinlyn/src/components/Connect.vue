@@ -25,12 +25,6 @@
             </v-col>
         </v-row>
 
-        <!-- Footer section -->
-        <v-row v-bind:style="footerStyle" class="footerBar ma-0">
-            <v-row justify="center" class="white--text pa-3">
-              <strong>Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
-            </v-row>
-        </v-row>
     </v-container>
 </template>
 
@@ -38,7 +32,6 @@
 export default {
     name: 'Connect',
     props: {
-        footerStyle: String,
         accentColour: String
     },
     computed: {
@@ -64,8 +57,8 @@ export default {
         color: #FFFFFF;
     }
     .connectRow {
-        min-height: calc(30vh + 50px);
-        padding: 0 65px 35px 65px;
+        min-height: 20vh;
+        padding: 35px 65px 0 65px;
     }
     .connectCol {
         text-align: center;
@@ -80,10 +73,6 @@ export default {
         font-size: 1.25em;
         font-weight: bold;
         padding-top: 10px;
-    }
-    .footerBar{
-        height: 50px;
-        background-color: #181818;
     }
 
 </style>

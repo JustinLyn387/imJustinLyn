@@ -3,21 +3,20 @@
         <v-row justify="center">
             <v-col id="contentCol" class="alignData">
                 <h1 class="heading" :style="underlineColour">Education</h1>
-                <v-row justify="center" class="pa-12"><v-img src="../assets/utsc.png" contain max-width="325px"/></v-row>
-                <h3>4th year • May 2021</h3>
-                <h5 :style="themeColour"><b>BSc in Computer Science, Mathematics, Statistics</b></h5>
-                <h3>Information Systems Specialist</h3>
+                <v-row justify="center" class="pa-12"><v-img src="../assets/utsc.png" contain max-width="250px"/></v-row>
+                <h3>4th year • May 2022</h3>
+                <h5 :style="themeColour"><b>Honours Bachelor of Science</b></h5>
+                <h3>Computer Science - Information Systems Specialist</h3>
 
                 <!-- Data table of courses -->
                 <v-row class="py-6 px-0 mt-12">
                     <v-row class="py-6"><h5 :style="themeColour">•</h5><h2>Relevant Courses</h2></v-row>
                     <v-data-table :headers="headerValues" :items="education" :expanded.sync="expanded" :show-expand="showExpand"
                                   item-key="name" class="courseTable" single-expand hide-default-footer dark
-                                  :disable-sort="!showExpand"
-                    >
+                                  :disable-sort="!showExpand" @click:row="(item, slot) => slot.expand(!slot.isExpanded)">
                         <!-- Templates for custom CSS on whatever columns -->
-                        <template v-slot:item.course="{ item }">
-                            <h4>{{ item.course }}</h4>
+                        <template v-slot:item.name="{ item }">
+                            <h4>{{ item.name }}</h4>
                         </template>
                         <template v-slot:item.icon="{ item }">
                             <v-icon small class="mr-2">{{ item.icon }}</v-icon>
@@ -62,12 +61,11 @@ export default {
     data: () => ({
         expanded: [],
         educationHeaders: [
-            { text: '', value: 'icon' },
+            { text: '', value: 'data-table-expand' },
             { text: 'Course', value: 'course' },
             { text: 'Name', value: 'name' },
             { text: 'Category', value: 'category' },
-            { text: 'Semester', value: 'taken' },
-            { text: '', value: 'data-table-expand' }
+            { text: 'Semester', value: 'taken' }
         ],
         education: [
             {
@@ -78,7 +76,6 @@ export default {
                     'mutual exclusion, deadlock. Additional topics include memory management, file systems, process ' +
                     'scheduling, threads, and protection.',
                 category: 'Computer Science',
-                icon: 'mdi-desktop-mac-dashboard',
                 taken: '2021 • Winter'
             },
             {
@@ -89,7 +86,6 @@ export default {
                     'protocols; application, system and network attacks and defences; intrusion detection and ' +
                     'prevention; social engineering attacks; risk assessment and management.',
                 category: 'Computer Science',
-                icon: 'mdi-desktop-mac-dashboard',
                 taken: '2020 • Fall'
             },
             {
@@ -100,7 +96,6 @@ export default {
                     'dynamic client content, dynamically served content, n-tiered architectures, web development ' +
                     'processes and security on the web.',
                 category: 'Computer Science',
-                icon: 'mdi-desktop-mac-dashboard',
                 taken: '2021 • Winter'
             },
             {
@@ -111,7 +106,6 @@ export default {
                     'routing; link layer with local area networks, connection-oriented protocols and error detection ' +
                     'and recovery;',
                 category: 'Computer Science',
-                icon: 'mdi-desktop-mac-dashboard',
                 taken: '2020 • Fall'
             },
             {
@@ -123,7 +117,6 @@ export default {
                     'motivation and job design, leadership, organizational design and culture, group dynamics ' +
                     'and inter-group relations.',
                 category: 'Management & Business',
-                icon: 'mdi-office-building',
                 taken: '2021 • Winter'
             },
             {
@@ -135,7 +128,6 @@ export default {
                     'governance, advocacy, and information flow and knowledge exchange and what do these mean ' +
                     'for development?',
                 category: 'Development Studies',
-                icon: 'mdi-head-lightbulb-outline',
                 taken: '2020 • Fall'
             },
             {
@@ -147,7 +139,6 @@ export default {
                     'interactive systems, prototyping tools, information search and visualization, mobile devices, ' +
                     'social media and social networking, and accessibility factors.',
                 category: 'Computer Science',
-                icon: 'mdi-desktop-mac-dashboard',
                 taken: '2021 • Summer'
             },
             {
@@ -157,7 +148,6 @@ export default {
                     'calculus is not used in this course, algebra and graphs are used extensively to illuminate ' +
                     'economic analysis.',
                 category: 'Management & Business',
-                icon: 'mdi-office-building',
                 taken: '2018 • Winter'
             }
         ]

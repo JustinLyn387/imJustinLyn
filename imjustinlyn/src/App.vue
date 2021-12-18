@@ -14,7 +14,7 @@
             </v-col>
           </v-row>
           <v-row justify="center" class="colourBtn">
-            <v-icon :color="accentColour" @click="showColours = !showColours">mdi-zodiac-gemini</v-icon>
+            <v-icon :color="accentColour" @click="showColours = !showColours">mdi-cupcake</v-icon>
           </v-row>
           <strong class="credits">Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
         </v-col>
@@ -43,7 +43,7 @@
           <!-- My projects component -->
           <Projects id="projects" class="component" :accentColour="accentColour"/>
           <!-- Lets connect component -->
-          <Connect id="connect" class="subComponent" :footerStyle="dynamicStyle" :accentColour="accentColour"/>
+          <Connect id="connect" class="component" :accentColour="accentColour"/>
         </v-col>
       </v-row>
 
@@ -173,11 +173,6 @@ export default {
   }
   .component {
     padding: 8vh 50px;
-    overflow: hidden;
-  }
-  .subComponent {
-    min-height: 45vh;
-    padding: 8vh 0 0 0;
     overflow: hidden;
   }
   .heading {

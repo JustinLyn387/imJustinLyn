@@ -17,7 +17,8 @@
                                         <h1>{{ project.name }}</h1>
                                         <p>{{ project.tech }}</p>
                                         <p><b>Status: {{project.status }}</b></p>
-                                        <v-btn v-bind:color="project.colour" class="viewBtn" v-bind:href="project.link" target="_blank">View on Github</v-btn>
+                                        <v-btn v-bind:color="project.colour" class="viewBtn" v-bind:href="project.link"
+                                               target="_blank">{{ project.btn }}</v-btn>
                                     </v-col>
                                 </v-row>
                             </v-col>
@@ -44,52 +45,58 @@ export default {
     data: () => ({
         projects: [
             {
-                name:'Cubing Cafe',
-                tech:'VUE • GRAPHQL • MONGOOSE',
-                link:'https://github.com/No-Way-Jose/CubingCafe',
-                status:'Online',
-                icon:'mdi-cube-scan',
-                colour:'orange'
+              name:'UTSC Index',
+              tech:'VUE • PYTHON • MONGODB',
+              link:'https://utscindex.herokuapp.com',
+              status:'Online',
+              icon:'mdi-book-open-page-variant',
+              btn: 'Visit Website',
+              colour:'#004699'
             },
             {
-                name:'Course Tree',
-                tech:'VUE • PYTHON • SQL',
-                link:'https://github.com/JustinLyn387/utsc-coursetree',
-                status:'Development',
-                icon:'mdi-school-outline',
-                colour:'primary'
+              name:'Cubing Cafe',
+              tech:'VUE • GRAPHQL • MONGOOSE',
+              link:'https://thecubingcafe.herokuapp.com/',
+              status:'Online',
+              icon:'mdi-cube-scan',
+              btn: 'Visit Website',
+              colour:'orange'
             },
             {
-                name:'Kijiji Mapper',
-                tech:'JAVA • MAVEN • HTML',
-                link:'https://github.com/JustinLyn387/Kijiji-Crawler-Assignment',
-                status:'Complete',
-                icon:'mdi-map-marker-multiple-outline',
-                colour:'#373373'
+              name:'imJustinLyn',
+              tech:'VUE • FIREBASE',
+              link:'https://github.com/JustinLyn387/imJustinLyn',
+              status:'Online',
+              icon:'mdi-card-account-details-outline',
+              btn: 'View on Github',
+              colour:'#DC143C'
             },
             {
-                name:'DFI Chatbot',
-                tech:'JAVA • ANGULAR • IBM WATSON',
-                link:'https://github.com/JustinLyn387/CSCC01-Chatbot-Project',
-                status:'Complete',
-                icon:'mdi-chat-processing-outline',
-                colour:'blue'
+              name:'DFI Chatbot',
+              tech:'JAVA • ANGULAR • IBM WATSON',
+              link:'https://github.com/JustinLyn387/CSCC01-Chatbot-Project',
+              status:'Complete',
+              icon:'mdi-chat-processing-outline',
+              btn: 'View on Github',
+              colour:'blue'
             },
             {
-                name:'WatchedBox',
-                tech:'VUE • PYTHON • NoSQL',
-                link:'https://github.com/JustinLyn387/WatchedBox',
-                status:'Development',
-                icon:'mdi-drama-masks',
-                colour:'#C3073F'
+              name:'Kijiji Mapper',
+              tech:'JAVA • MAVEN • HTML',
+              link:'https://github.com/JustinLyn387/Kijiji-Crawler-Assignment',
+              status:'Complete',
+              icon:'mdi-map-marker-multiple-outline',
+              btn: 'View on Github',
+              colour:'#373373'
             },
             {
-                name:'Terminal',
-                tech:'JAVA',
-                link:'https://github.com/JustinLyn387/Java-Mock-Terminal',
-                status:'Complete',
-                icon:'mdi-console',
-                colour:'#00AD28'
+              name:'Terminal',
+              tech:'JAVA',
+              link:'https://github.com/JustinLyn387/Java-Mock-Terminal',
+              status:'Complete',
+              icon:'mdi-console',
+              btn: 'View on Github',
+              colour:'#00AD28'
             }
         ]
     })
