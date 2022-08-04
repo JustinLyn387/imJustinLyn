@@ -9,12 +9,12 @@
                     <v-col class="connectCol">
                         <v-icon class="connectIcon">mdi-linkedin</v-icon>
                         <p class="subHead" :style="themeColour">Let's Connect</p>
-                        <a href="https://www.linkedin.com/in/justin-lyn-b9626114b/" target="_blank">Linkedin Profile</a>
+                        <a href="https://www.linkedin.com/in/justin-lyn/" target="_blank">Linkedin Profile</a>
                     </v-col>
                     <v-col class="connectCol">
                         <v-icon class="connectIcon">mdi-email-outline</v-icon>
                         <p class="subHead" :style="themeColour">Email Me At</p>
-                        <a href="mailto:justin.lyn@mail.utoronto.ca">justin.lyn@mail.utoronto.ca</a>
+                        <a href="mailto:lyn.justin@outlook.com">lyn.justin@outlook.com</a>
                     </v-col>
                     <v-col class="connectCol">
                         <v-icon class="connectIcon">mdi-facebook</v-icon>

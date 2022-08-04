@@ -6,7 +6,7 @@
 
                 <!-- Row of project cards -->
                 <v-row class="pt-12 pb-4" justify="center">
-                    <v-col v-for="(project, i) in projects" :key="i" lg="4" md="6" xs="12" class="projCol">
+                    <v-col v-for="(project, i) in projects" :key="i" lg="4" md="4" xs="12" class="projCol">
                         <v-card class="projectCard pb-6" elevation="12">
                             <v-col style="height: 100%">
                                 <v-row justify="center" class="pa-5" style="height: 55%">
@@ -45,9 +45,9 @@ export default {
     data: () => ({
         projects: [
             {
-              name:'UTSC Index',
+              name:'UofT Index',
               tech:'VUE • PYTHON • MONGODB',
-              link:'https://utscindex.herokuapp.com',
+              link:'https://uoftindex.ca',
               status:'Online',
               icon:'mdi-book-open-page-variant',
               btn: 'Visit Website',

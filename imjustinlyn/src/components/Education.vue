@@ -4,7 +4,7 @@
             <v-col id="contentCol" class="alignData">
                 <h1 class="heading" :style="underlineColour">Education</h1>
                 <v-row justify="center" class="pa-12"><v-img src="../assets/utsc.png" contain max-width="250px"/></v-row>
-                <h3>4th year • May 2022</h3>
+                <h3>June 10, 2022</h3>
                 <h5 :style="themeColour"><b>Honours Bachelor of Science</b></h5>
                 <h3>Computer Science - Information Systems Specialist</h3>
 
@@ -30,7 +30,7 @@
         </v-row>
 
     </v-container>
-    
+
 </template>
 
 <script>

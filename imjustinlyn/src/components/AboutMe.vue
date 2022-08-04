@@ -6,27 +6,22 @@
             <v-col id="contentCol">
                 <h1 class="heading" :style="underlineColour">About Me</h1>
                 <v-col>
-                    <v-row class="pt-10">
-                        <v-col class="text-center pb-5">
-                            <h1 class="name" :style="themeColour">Justin Lyn</h1>
-                            <h3>Computer Science Student</h3>
-                        </v-col>
-                    </v-row>
                     <v-row justify="center" align="center" class="py-2">
-                        <v-col cols="4" class="fullCol justify-center shrink pb-8">
-                          <img src="../assets/profilePic.jpg" class="mt-2 profilePic" :style="themeColour">
+                        <v-col cols="12" class="col-md-4 text-center py-8">
+                          <img src="../assets/profile.jpg" class="mt-2 profilePic" :style="themeColour">
                         </v-col>
-                        <v-col class="bio px-12 grow">
-                            <p><b>I code, design, collaborate, and solve problems.</b> I love learning
-                                new concepts and technologies, and creating things that other people can use and
-                                share with others.</p>
-                            <p>My computer science career started back when I was in grade 11, and since attending
-                                the University of Toronto in the fall of 2017, I have been narrowing down what path
-                                I want to pursue in the world of computer science. Now entering my final semester,
-                                the last five years of my educational career have allowed me to learn and experience
-                                various aspects and pathways related to the field. Such experiences and knowledge
-                                include but are not limited to web development, database management, software life
-                                cycles, management, and prototyping.</p>
+                        <v-col cols="12" class="col-md-8 bio px-0 px-md-12">
+                            <h1 class="name text-center text-md-left" :style="themeColour">Justin Lyn</h1>
+                            <h3 class="mb-10 text-center text-md-left">UofT Computer Science Graduate</h3>
+                            <p><b>I code, design, collaborate and solve problems.</b> I love learning new concepts and
+                              technologies and creating things that other people can use and share with others.</p>
+                            <p>My computer science career started back when I was in grade 11, and since attending the
+                              University of Toronto in the fall of 2017, I have been narrowing down what path I want to
+                              pursue in the world of computer science. Having graduated in June of 2022, the last five
+                              years of my educational career have allowed me to learn and experience various aspects
+                              and pathways related to the field. Such experiences and knowledge include but are not
+                              limited to web development, database management, file systems, management, and
+                              prototyping.</p>
                         </v-col>
                     </v-row>
                     <v-row class="pt-8"><h4 :style="themeColour">•</h4><h2>Skills</h2></v-row>
@@ -88,7 +83,6 @@ export default {
     }
     .bio {
         max-width: 925px;
-        min-width: 450px;
     }
     .name {
         color: var(--accent-colour);
@@ -99,10 +93,6 @@ export default {
         z-index: 10;
         background-color: #121212;
         color: #FFFFFF;
-    }
-    .fullCol {
-        min-width: 290px;
-        text-align: center;
     }
     img {
         max-width: 250px;

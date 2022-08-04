@@ -12,7 +12,8 @@
                     <v-row>
                         <v-col>
                             <v-row v-for="(option, i) in menuOptions" :key="i" justify="center">
-                                <v-flex class="menuOption" :style="themeColour" v-scroll-to="scrollTo(option.value)" @click="showMenu = !showMenu">{{ option.label }}</v-flex>
+                                <v-flex class="menuOption" :style="themeColour" v-scroll-to="scrollTo(option.value)"
+                                        @click="showMenu = !showMenu">{{ option.label }}</v-flex>
                             </v-row>
                         </v-col>
                     </v-row>
@@ -26,8 +27,8 @@
         </section>
         <v-row class="homeText">
             <v-col class="py-0 homeColumn">
-                <h1>Justin? WHO?</h1>
-                <h2>Hey there! Welcome to my website where you can find out a little bit more about who I am ...</h2>
+                <p class="text-h2 text-sm-h1 font-weight-bold">Justin? WHO?</p>
+                <p class="text-h6 text-sm-h5">Hey there! Welcome to my website where you can find out a little bit more about who I am ...</p>
             </v-col>
         </v-row>
     </v-container>
@@ -102,7 +103,7 @@ export default {
         padding-right: 25px;
         font-size: 7em
     }
-    h2 {
+    .text-sm-h5 {
         padding-right: 25px;
         max-width: 600px;
     }
