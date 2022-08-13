@@ -156,6 +156,15 @@ export default {
 </script>
 
 <style scoped>
+    h5 {
+      color: var(--accent-colour);
+      font-size: 1.65em;
+      padding-right: 10px;
+    }
+    >>>.theme--dark.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+      background: #333232;
+      cursor: pointer;
+    }
     .educationContainer {
         min-width: 100%;
         background-color: #181818;
@@ -170,11 +179,6 @@ export default {
     .alignData {
         text-align: center;
         justify-content: center;
-    }
-    h5 {
-        color: var(--accent-colour);
-        font-size: 1.65em;
-        padding-right: 10px;
     }
 
 </style>

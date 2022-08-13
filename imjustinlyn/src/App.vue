@@ -10,13 +10,14 @@
           </v-row>
           <v-row>
             <v-col class="fullScreenMenuCol">
-              <v-flex v-for="(item, i) in sidePanel" :key="i" class="sideOptions" :style="themeColour" v-scroll-to="scrollTo(item.value)">{{ item.label }}</v-flex>
+              <v-flex v-for="(item, i) in sidePanel" :key="i" class="sideOptions" :style="themeColour"
+                      v-scroll-to="scrollTo(item.value)">{{ item.label }}</v-flex>
             </v-col>
           </v-row>
           <v-row justify="center" class="colourBtn">
-            <v-icon :color="accentColour" @click="showColours = !showColours">mdi-cupcake</v-icon>
+            <v-icon :color="accentColour" class="bounce" @click="showColours = !showColours">mdi-cupcake</v-icon>
           </v-row>
-          <strong class="credits">Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
+          <strong class="credits font-weight-medium">Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
         </v-col>
 
         <v-dialog v-model="showColours" fullscreen persistent transition="v-scroll-y-transition">
@@ -25,7 +26,8 @@
               <v-btn outlined @click="updateAccentColour" color="#FFFFFF" class="closeBtn"><v-icon>mdi-close</v-icon></v-btn>
             </v-row>
             <v-row class="colourRow mt-0">
-              <v-color-picker class="ma-2" show-swatches dark mode="hexa" dot-size="15" width="500" canvas-height="400" hide-mode-switch v-model="newColour"></v-color-picker>
+              <v-color-picker class="ma-2" show-swatches dark mode="hexa" dot-size="15" width="500" canvas-height="400"
+                              hide-mode-switch v-model="newColour"/>
             </v-row>
           </v-container>
         </v-dialog>
@@ -192,6 +194,7 @@ export default {
     bottom: 15px;
     padding-left: 1.5%;
     font-size: 0.65vw;
+    overflow-x: hidden;
   }
   .colourRow{
     position: fixed;
@@ -216,6 +219,20 @@ export default {
   }
   .theme--dark.v-color-picker {
     background-color: #181818;
+  }
+  .bounce {
+    animation-duration: 2s;
+    animation-iteration-count: 5;
+    animation-name: bounce;
+    animation-timing-function: ease;
+  }
+  @keyframes bounce {
+    0%   { transform: scale(1,1) translateY(0); }
+    10%  { transform: scale(1.1,.9) translateY(0); }
+    30%  { transform: scale(.9,1.1) translateY(-15px); }
+    50%  { transform: scale(1,1) translateY(0); }
+    60%  { transform: scale(.9,1) translateY(-10px); }
+    100% { transform: scale(1,1) translateY(0); }
   }
 
 </style>

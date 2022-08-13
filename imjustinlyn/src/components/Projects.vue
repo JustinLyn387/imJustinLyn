@@ -2,10 +2,10 @@
     <v-container class="projectContainer" :style="themeColour">
         <v-row justify="center">
             <v-col id="contentCol">
-                <h1 class="heading">My Projects</h1>
+                <h1 class="heading">Projects</h1>
 
                 <!-- Row of project cards -->
-                <v-row class="pt-12 pb-4" justify="center">
+                <v-row class="py-10" justify="center">
                     <v-col v-for="(project, i) in projects" :key="i" lg="4" md="4" xs="12" class="projCol">
                         <v-card class="projectCard pb-6" elevation="12">
                             <v-col style="height: 100%">
@@ -15,8 +15,8 @@
                                 <v-row>
                                     <v-col class="projectText">
                                         <h1>{{ project.name }}</h1>
+                                        <p class="font-weight-medium">{{project.type }}</p>
                                         <p>{{ project.tech }}</p>
-                                        <p><b>Status: {{project.status }}</b></p>
                                         <v-btn v-bind:color="project.colour" class="viewBtn" v-bind:href="project.link"
                                                target="_blank">{{ project.btn }}</v-btn>
                                     </v-col>
@@ -48,7 +48,7 @@ export default {
               name:'UofT Index',
               tech:'VUE • PYTHON • MONGODB',
               link:'https://uoftindex.ca',
-              status:'Online',
+              type:'Side Project',
               icon:'mdi-book-open-page-variant',
               btn: 'Visit Website',
               colour:'#004699'
@@ -57,7 +57,7 @@ export default {
               name:'Cubing Cafe',
               tech:'VUE • GRAPHQL • MONGOOSE',
               link:'https://thecubingcafe.herokuapp.com/',
-              status:'Online',
+              type:'Group Project',
               icon:'mdi-cube-scan',
               btn: 'Visit Website',
               colour:'orange'
@@ -66,7 +66,7 @@ export default {
               name:'imJustinLyn',
               tech:'VUE • FIREBASE',
               link:'https://github.com/JustinLyn387/imJustinLyn',
-              status:'Online',
+              type:'Side Project',
               icon:'mdi-card-account-details-outline',
               btn: 'View on Github',
               colour:'#DC143C'
@@ -75,7 +75,7 @@ export default {
               name:'DFI Chatbot',
               tech:'JAVA • ANGULAR • IBM WATSON',
               link:'https://github.com/JustinLyn387/CSCC01-Chatbot-Project',
-              status:'Complete',
+              type:'Group Project',
               icon:'mdi-chat-processing-outline',
               btn: 'View on Github',
               colour:'blue'
@@ -84,7 +84,7 @@ export default {
               name:'Kijiji Mapper',
               tech:'JAVA • MAVEN • HTML',
               link:'https://github.com/JustinLyn387/Kijiji-Crawler-Assignment',
-              status:'Complete',
+              type:'Group Project',
               icon:'mdi-map-marker-multiple-outline',
               btn: 'View on Github',
               colour:'#373373'
@@ -93,7 +93,7 @@ export default {
               name:'Terminal',
               tech:'JAVA',
               link:'https://github.com/JustinLyn387/Java-Mock-Terminal',
-              status:'Complete',
+              type:'Group Project',
               icon:'mdi-console',
               btn: 'View on Github',
               colour:'#00AD28'
@@ -126,8 +126,8 @@ export default {
     }
     .projectCard {
         height: 35vh;
-        min-width: 285px;
         padding: 10px;
+        max-height: 500px;
         min-height: 400px;
     }
     .projectIcon {
