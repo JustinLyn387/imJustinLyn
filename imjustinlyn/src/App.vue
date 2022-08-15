@@ -174,7 +174,7 @@ export default {
     padding: 60% 25px 0 0;
   }
   .component {
-    padding: 8vh 50px;
+    padding: 8vh 40px;
     overflow: hidden;
   }
   .heading {

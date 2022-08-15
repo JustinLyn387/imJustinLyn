@@ -27,7 +27,7 @@
                     <v-row class="pt-8"><h4 :style="themeColour">•</h4><h2>Skills</h2></v-row>
                     <v-row class="pt-5 pb-10">
                         <v-col cols="12" sm="4" v-for="(skill, idx) in skills" :key="idx">
-                            <h3 class="pb-2">{{ skill.label }}</h3>
+                            <h3 class="pb-2 font-weight-medium">{{ skill.label }}</h3>
                             <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-progress-linear :value="skill.value" height="8" rounded color="white" v-bind="attrs" v-on="on"/>
@@ -73,9 +73,6 @@ export default {
 </script>
 
 <style scoped>
-    p {
-        font-size: 1.1em;
-    }
     h4 {
         color: var(--accent-colour);
         font-size: 1.65em;

@@ -5,3 +5,4 @@ dist/
 .env
 .jscramblerrc
 .idea/
+.DS_Store

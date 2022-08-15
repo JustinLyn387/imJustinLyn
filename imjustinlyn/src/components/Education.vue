@@ -5,12 +5,12 @@
                 <h1 class="heading" :style="underlineColour">Education</h1>
                 <v-row justify="center" class="pa-12"><v-img src="../assets/utsc.png" contain max-width="250px"/></v-row>
                 <h3>June 10, 2022</h3>
-                <h5 :style="themeColour"><b>Honours Bachelor of Science</b></h5>
-                <h3>Computer Science - Information Systems Specialist</h3>
+                <p class="text-h6 text-sm-h5 font-weight-bold mt-2 mb-0" :style="themeColour">Honours Bachelor of Science</p>
+                <p class="text-body-1 text-sm-h6 font-weight-medium">Computer Science - Information Systems Specialist</p>
 
                 <!-- Data table of courses -->
                 <v-row class="py-6 px-0 mt-12">
-                    <v-row class="py-6"><h5 :style="themeColour">•</h5><h2>Relevant Courses</h2></v-row>
+                    <v-row class="pt-6"><p class="text-h4 mb-0" :style="themeColour">•</p><h2>Relevant Courses</h2></v-row>
                     <v-data-table :headers="headerValues" :items="education" :expanded.sync="expanded" :show-expand="showExpand"
                                   item-key="name" class="courseTable" single-expand hide-default-footer dark
                                   :disable-sort="!showExpand" @click:row="(item, slot) => slot.expand(!slot.isExpanded)">
@@ -156,9 +156,8 @@ export default {
 </script>
 
 <style scoped>
-    h5 {
+    p {
       color: var(--accent-colour);
-      font-size: 1.65em;
       padding-right: 10px;
     }
     >>>.theme--dark.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
