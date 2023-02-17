@@ -56,7 +56,7 @@ export default {
           'Provided support for internal services and developed new features based on business needs',
           'Integrated a process which enabled the automation of data extraction and updates used for reporting and billing'
         ],
-        colour: 'primary',
+        colour: 'blue',
         icon: 'mdi-console'
       },
       {
@@ -80,7 +80,7 @@ export default {
           'Adapted different methods and teachings to try and accommodate each and every swimmer in the program',
           'Collaborated with other instructors on the progress of their swimmers and different teaching techniques to expand knowledge of different practices'
         ],
-        colour: 'primary',
+        colour: 'blue',
         icon: 'mdi-swim'
       },
       {
@@ -92,7 +92,7 @@ export default {
           'Enforced pool safety and regulations to ensure that the swimming environment was safe for everyone',
           'Coordinated groups of children and taught water safety classes and drills'
         ],
-        colour: 'primary',
+        colour: 'blue',
         icon: 'mdi-lifebuoy'
       }
     ]
