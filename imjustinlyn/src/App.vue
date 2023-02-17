@@ -1,129 +1,127 @@
 <template>
   <v-app>
-    <v-main>
-      <v-row class="ma-0">
-
-        <!-- Side navigation menu for larger resolution screens-->
-        <v-col v-bind:style="fullScreenMenu" cols="2" class="fullScreenMenu">
-          <v-row justify="center" class="pt-12">
-            <v-flex class="heading logo" :style="underlineColour" v-scroll-to="scrollTo('home')">iJL</v-flex>
-          </v-row>
-          <v-row>
-            <v-col class="fullScreenMenuCol">
-              <v-flex v-for="(item, i) in sidePanel" :key="i" class="sideOptions" :style="themeColour"
-                      v-scroll-to="scrollTo(item.value)">{{ item.label }}</v-flex>
-            </v-col>
-          </v-row>
-          <v-row justify="center" class="colourBtn">
-            <v-icon :color="accentColour" class="bounce" @click="showColours = !showColours">mdi-cupcake</v-icon>
-          </v-row>
-          <strong class="credits font-weight-medium">Designed by Justin Lyn • Copyright © {{ new Date().getFullYear() }}</strong>
-        </v-col>
-
-        <v-dialog v-model="showColours" fullscreen persistent transition="v-scroll-y-transition">
-          <v-container class="colourScreen pt-5">
-            <v-row justify="start" class="pl-3">
-              <v-btn outlined @click="updateAccentColour" color="#FFFFFF" class="closeBtn"><v-icon>mdi-close</v-icon></v-btn>
-            </v-row>
-            <v-row class="colourRow mt-0">
-              <v-color-picker class="ma-2" show-swatches dark mode="hexa" dot-size="15" width="500" canvas-height="400"
-                              hide-mode-switch v-model="newColour"/>
-            </v-row>
-          </v-container>
-        </v-dialog>
-
-        <!-- Main content area -->
-        <v-col id="contentArea" :cols="mainColumns" class="pl-0">
-          <!-- Homepage component -->
-          <Homepage id="home" class="component relativeClass" :menuStyle="dynamicStyle" :menuOptions="sidePanel" :accentColour="accentColour"/>
-          <!-- About me component -->
-          <AboutMe id="about" class="component" :aboutColumn="aboutColumn" :accentColour="accentColour"/>
-          <!-- Work experience component -->
-          <WorkExperience id="experience" class="component" :accentColour="accentColour"/>
-          <!-- Education component -->
-          <Education id="education" class="component" :resolution="resolution" :accentColour="accentColour"/>
-          <!-- My projects component -->
-          <Projects id="projects" class="component" :accentColour="accentColour"/>
-          <!-- Lets connect component -->
-          <Connect id="connect" class="component" :accentColour="accentColour"/>
-        </v-col>
+    <v-app-bar id="appBar" flat color="background" app>
+      <v-icon v-if="$vuetify.breakpoint.smAndDown" color="text" size="26" @click="mobileMenu = !mobileMenu"
+              style="position: absolute; top: 18px; left: 18px">mdi-menu</v-icon>
+      <v-row justify="center" class="align-center">
+        <v-flex class="heading logo pb-0 pointer" v-scroll-to="scrollTo('appBar')">iJL</v-flex>
       </v-row>
+      <v-icon class="themeToggle" size="26" color="text" @click="$vuetify.theme.dark = !$vuetify.theme.dark">
+        {{ $vuetify.theme.dark ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
+      </v-icon>
+    </v-app-bar>
+    <!-- Full screen navigation menu for smaller screens -->
+    <v-dialog v-model="mobileMenu" fullscreen persistent transition="v-scroll-y-transition">
+      <v-container class="menu pt-5">
+        <v-row justify="start" class="pl-3">
+          <v-btn outlined @click="mobileMenu = !mobileMenu" color="transparent" class="closeBtn">
+            <v-icon color="text" size="36" class="mt-8">mdi-close</v-icon>
+          </v-btn>
+        </v-row>
+        <div class="menuRow">
+          <v-row v-for="(section, i) in sections" :key="i" justify="center">
+            <v-flex class="menuOption my-1" v-scroll-to="scrollTo(section.id)" @click="mobileMenu = !mobileMenu">
+              {{ section.title }}
+            </v-flex>
+          </v-row>
+        </div>
+      </v-container>
+    </v-dialog>
+    <!-- Side navigation menu for larger screens -->
+    <v-navigation-drawer v-if="$vuetify.breakpoint.mdAndUp" mini-variant permanent app mini-variant-width="85" color="background">
+      <v-col class="fill-height d-flex align-center justify-center ma-0">
+        <v-list>
+          <v-list-item v-for="(section, idx) in sections" :key="idx" class="my-3">
+            <v-list-item-icon>
+              <v-tooltip right>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon v-bind="attrs" v-on="on" class="pointer" size="25" v-scroll-to="scrollTo(section.id)" :color="activeSection === section.title ? 'primary' : '#757575'">
+                    {{ section.icon }}
+                  </v-icon>
+                </template>
+                <span class="text-capitalize">{{  section.id }}</span>
+              </v-tooltip>
+            </v-list-item-icon>
+          </v-list-item>
+        </v-list>
+      </v-col>
+    </v-navigation-drawer>
+    <!-- MAIN CONTENT AREA -->
+    <v-main style="background: var(--v-background-base)">
+      <svg v-if="$vuetify.breakpoint.mdAndUp" width="50" height="50" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="30" pathLength="1" class="bg" />
+        <circle cx="50" cy="50" r="30" pathLength="1" class="progress" />
+      </svg>
 
+      <Homepage id="home" class="component relativeClass"/>
+
+      <section class="section"><h1>Projects</h1></section>
+      <Projects id="projects" class="component"/>
+
+      <section class="section"><h1>About Me</h1></section>
+      <AboutMe id="about" class="component"/>
+
+      <section class="section"><h1>Work Experience</h1></section>
+      <WorkExperience id="experience" class="component"/>
+
+      <section class="section"><h1>Connect</h1></section>
+      <Connect id="connect" class="component"/>
     </v-main>
+    <!-- Website footer -->
+    <v-footer class="py-4 px-0" color="background" :style="$vuetify.breakpoint.mdAndUp ? 'padding-left: 85px !important;' : ''">
+      <v-col class="my-2">
+        <v-row class="px-0"><v-divider class="my-2 px-0"/></v-row>
+        <v-row class="mt-7 mx-7 align-center justify-center">
+          <p class="text-body-2 mb-0 mr-4">Designed by Justin Lyn
+            <v-icon class="px-2" color="primary">mdi-rabbit-variant-outline</v-icon>
+            {{ new Date().getFullYear() }}
+          </p>
+        </v-row>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
+import { inView, animate, scroll } from "motion"
 
 import Homepage from './components/Homepage';
 import AboutMe from './components/AboutMe';
 import WorkExperience from './components/WorkExperience';
-import Education from './components/Education';
 import Projects from './components/Projects';
-import Connect from './components/Connect';
+import Connect from "@/components/Connect.vue";
 
 export default {
   name: 'App',
-  components: {
-    Homepage, AboutMe, WorkExperience, Education, Projects, Connect
-  },
+  components: { Homepage, AboutMe, WorkExperience, Projects, Connect },
   data: () => ({
-    accentColour: '#DC143C',
-    newColour: '#DC143C',
-    headingUnderline: `linear-gradient(#DC143C, transparent) bottom /var(--d, 35%) 4px no-repeat`,
-    fullScreenMenu: 'display: block',
-    dynamicStyle: 'display: none',
-    resolution: 0,
-    mainColumns: 10,
-    aboutColumn: 8,
-    showColours: false,
-    sidePanel: [
-      { label: 'about me', value: 'about' },
-      { label: 'work experience', value: 'experience' },
-      { label: 'education', value: 'education' },
-      { label: 'projects', value: 'projects' },
-      { label: 'connect', value: 'connect' }
+    mobileMenu: false,
+    activeSection: '',
+    sections: [
+      { id: 'projects', title: 'Projects', icon: 'mdi-xml' },
+      { id: 'about', title: 'About Me', icon: 'mdi-account-circle-outline' },
+      { id: 'experience', title: 'Work Experience', icon: 'mdi-briefcase-clock-outline' },
+      { id: 'connect', title: 'Connect', icon: 'mdi-at' }
     ]
   }),
   mounted() {
-    this.$nextTick(function() {
-      window.addEventListener('resize', this.getWindowWidth);
-      this.getWindowWidth()
+    if (this.$vuetify.breakpoint.mdAndUp) scroll(animate('.progress', { strokeDasharray: ['0,1', '1,1'] }));
+    inView('.section', ({ target }) => {
+      this.activeSection = target.innerText
+      const headingAnimation = animate(
+        target.querySelector('h1'),
+        { opacity: 1, transform: 'none' },
+        { delay: 0.2, duration: 0.9, easing: [0.17, 0.55, 0.55, 1] }
+      )
+      return () => {
+        this.activeSection = ''
+        headingAnimation.stop()
+      }
     })
   },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.getWindowWidth);
-  },
-  computed: {
-    themeColour () {
-      return { '--accent-colour': this.accentColour }
-    },
-    underlineColour () {
-      return { '--underline-colour': `linear-gradient(${this.accentColour}, transparent) bottom /var(--d, 35%) 4px no-repeat` }
-    }
-  },
   methods: {
-    getWindowWidth() {
-      this.resolution = document.documentElement.clientWidth
-      if (this.resolution < 1300) {
-        this.fullScreenMenu = 'display: none'
-        this.dynamicStyle = 'display: block'
-        this.mainColumns = 12
-        this.aboutColumn = 11
-      } else {
-        this.fullScreenMenu = 'display: block'
-        this.dynamicStyle = 'display: none'
-        this.mainColumns = 10
-        this.aboutColumn = 8
-      }
-    },
     scrollTo (section) {
-      return { element: '#' + section, container: '#contentArea', offset: -12 }
-    },
-    updateAccentColour () {
-      this.showColours = !this.showColours
-      this.headingUnderline = 'linear-gradient(' + this.newColour + ', transparent) bottom /var(--d, 35%) 4px no-repeat'
-      this.accentColour = this.newColour
+      return { element: '#' + section, offset: -100 }
     }
   }
 }
@@ -132,107 +130,95 @@ export default {
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap');
 
-  #contentCol {
+  h1 {
+    font-size: 1.75rem;
+  }
+  section {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding-left: min(max(calc(calc(100% - 1200px) / 2), 25px), 12%);
+  }
+  section h1 {
+    display: block;
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  svg {
+    z-index: 100;
+    position: fixed;
+    top: 10px;
+    left: 18px;
+    transform: rotate(-90deg);
+  }
+  circle {
+    stroke-dashoffset: 0;
+    stroke-width: 12%;
+    fill: none;
+  }
+
+  .container {
+    min-width: 100%;
+  }
+  .contentCol {
     max-width: 1200px;
   }
-  #contentArea {
-    padding: 0;
-    margin: 0;
-    height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden
-  }
   .logo {
-    font-size: 2em;
-    font-weight: bold;
+    font-family: 'Ramabhadra', sans-serif;
+    font-weight: bolder;
+    font-size: 2.25em;
     text-align: center;
     max-width: 15%;
   }
-  .logo:hover {
-    cursor: pointer;
+  .themeToggle {
+    position: absolute !important;
+    top: 18px;
+    right: 18px
+  }
+  .themeToggle:focus::after {
+    opacity: 0 !important;
   }
   .relativeClass {
     position: relative;
   }
-  .sideOptions {
-    display: block;
-    font-size: 1.5em;
-    font-weight: bold;
-    padding-bottom: 10px;
-  }
-  .sideOptions:hover {
-    color: var(--accent-colour);
+  .pointer {
     cursor: pointer;
   }
-  .fullScreenMenu {
-    height: 100vh;
-    background-color: #181818;
-    color: #FFFFFF
-  }
-  .fullScreenMenuCol {
-    text-align: right;
-    padding: 60% 25px 0 0;
-  }
   .component {
-    padding: 8vh 40px;
+    padding: 50px 20px;
     overflow: hidden;
   }
-  .heading {
-    width: fit-content;
-    font-family: 'Ramabhadra', sans-serif;
-    font-weight: bolder;
-    font-size: 2.25em;
-    padding-bottom: 10px;
-    background: var(--underline-colour);
-    transition: 0.5s;
+  .bg {
+    stroke: #ababab;
   }
-  .heading:hover {
-    --d: 85%;
+  .progress {
+    stroke: var(--v-primary-base);
+    stroke-dasharray: 0, 1;
   }
-  .credits {
-    position: absolute;
-    bottom: 15px;
-    padding-left: 1.5%;
-    font-size: 0.65vw;
-    overflow-x: hidden;
+
+  .menu {
+    min-width: 100%;
+    min-height: 100vh;
+    background: var(--v-background-base);
   }
-  .colourRow{
+  .menuOption {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 30px;
+    color: var(--v-text-base);
+    font-weight: bold;
+  }
+  .menuOption:hover {
+    color: var(--v-primary-base);
+    cursor: pointer;
+  }
+  .menuRow {
     position: fixed;
     top: 50%;
     left: 50%;
+    width: max-content;
     transform: translate(-46%, -50%);
-  }
-  .colourScreen {
-    min-width: 100%;
-    min-height: 100vh;
-    background-color: #181818;
-  }
-  .colourBtn {
-    position: absolute;
-    bottom: 65px;
-    padding-left: 7.5%;
-  }
-  .closeBtn {
-    font-size: xx-large;
-    color: #FFFFFF;
-    margin: 25px;
-  }
-  .theme--dark.v-color-picker {
-    background-color: #181818;
-  }
-  .bounce {
-    animation-duration: 2s;
-    animation-iteration-count: 5;
-    animation-name: bounce;
-    animation-timing-function: ease;
-  }
-  @keyframes bounce {
-    0%   { transform: scale(1,1) translateY(0); }
-    10%  { transform: scale(1.1,.9) translateY(0); }
-    30%  { transform: scale(.9,1.1) translateY(-15px); }
-    50%  { transform: scale(1,1) translateY(0); }
-    60%  { transform: scale(.9,1) translateY(-10px); }
-    100% { transform: scale(1,1) translateY(0); }
   }
 
 </style>

@@ -1,104 +1,83 @@
 <template>
-    <v-container class="aboutContainer">
-        <v-row justify="center">
-
-            <!-- Main content col sectioned into rows -->
-            <v-col id="contentCol">
-                <h1 class="heading" :style="underlineColour">About Me</h1>
-                <v-col>
-                    <v-row justify="center" align="center" class="py-2">
-                        <v-col cols="12" class="col-md-4 text-center py-8">
-                          <img src="../assets/profile.jpg" class="mt-2 profilePic" :style="themeColour">
-                        </v-col>
-                        <v-col cols="12" class="col-md-8 bio px-0 px-md-12">
-                            <h1 class="name text-center text-md-left" :style="themeColour">Justin Lyn</h1>
-                            <h3 class="mb-10 text-center text-md-left">UofT Computer Science Graduate</h3>
-                            <p><b>I code, design, collaborate and solve problems.</b> I love learning new concepts and
-                              technologies and creating things that other people can use and share with others.</p>
-                            <p>My computer science career started back when I was in grade 11, and since attending the
-                              University of Toronto in the fall of 2017, I have been narrowing down what path I want to
-                              pursue in the world of computer science. Having graduated in June of 2022, the last five
-                              years of my educational career have allowed me to learn and experience various aspects
-                              and pathways related to the field. Such experiences and knowledge include but are not
-                              limited to web development, database management, file systems, management, and
-                              prototyping.</p>
-                        </v-col>
-                    </v-row>
-                    <v-row class="pt-8"><h4 :style="themeColour">•</h4><h2>Skills</h2></v-row>
-                    <v-row class="pt-5 pb-10">
-                        <v-col cols="12" sm="4" v-for="(skill, idx) in skills" :key="idx">
-                            <h3 class="pb-2 font-weight-medium">{{ skill.label }}</h3>
-                            <v-tooltip bottom>
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-progress-linear :value="skill.value" height="8" rounded color="white" v-bind="attrs" v-on="on"/>
-                                </template>
-                                <span>{{ skill.value }}/100</span>
-                            </v-tooltip>
-                        </v-col>
-                    </v-row>
-                    <v-row justify="center" class="pt-4">
-                        <v-btn :color="this.accentColour" outlined large href="/Resume.pdf" target="_blank">View My Resume</v-btn>
-                    </v-row>
-                </v-col>
-            </v-col>
+  <v-container class="container">
+    <v-row justify="center">
+      <!-- Main content col sectioned into rows -->
+      <v-col class="contentCol">
+        <v-row justify="center" align="center" class="py-2">
+          <v-col cols="12" class="col-md-4 text-center">
+            <img src="../assets/profile.jpg" class="mt-2 profilePic">
+          </v-col>
+          <v-col cols="12" class="col-md-8 bio px-5 px-md-12">
+            <h1 class="name text-center text-md-left">Justin Lyn</h1>
+            <p class="font-weight-medium text-center text-md-left primary--text">
+              Coder | Designer | Rubik's cube solver | K-Drama watcher
+            </p>
+            <p>Hey there! I’m Justin, a recent graduate from the University of Toronto, founder of UofT Index, and associate application developer at ADP.</p>
+            <p>I enjoy learning new concepts and technologies and building things that people can use and share with others. With my enthusiasm for coding, web development, and problem-solving, I strive to pursue opportunities where I can design and create new ways for people to interact with technology and information.</p>
+            <p>Outside the office, you’ll find me solving Rubik’s cubes, bike riding along the lake, and binge-watching the latest K-Dramas.</p>
+          </v-col>
         </v-row>
-    </v-container>
+        <v-row class="mx-0 mt-8 mb-4 mx-2 align-center">
+          <h2 class="font-weight-regular mr-12">Recent Tech Stack</h2>
+          <v-divider/>
+        </v-row>
+
+        <v-row class="pt-5 pb-10 mx-2">
+          <v-col v-for="(tech, idx) in techStack" :key="idx" class="text-center" cols="4" md="2">
+            <v-icon x-large color="text">{{ tech.icon }}</v-icon>
+            <p class="text--secondary mt-3">{{ tech.label }}</p>
+          </v-col>
+        </v-row>
+
+        <v-row class="my-4 mx-2 align-center">
+          <h2 class="font-weight-regular mr-12">Interests & Hobbies</h2>
+          <v-divider/>
+        </v-row>
+        <v-row class="pt-5 pb-10 mx-2">
+          <v-col class="text-center" cols="12" md="3">• Solving Rubik's cubes</v-col>
+          <v-col class="text-center" cols="12" md="3">• Designing new UI/Xs</v-col>
+          <v-col class="text-center" cols="12" md="3">• Skiing & Swimming</v-col>
+          <v-col class="text-center" cols="12" md="3">• Playing the piano</v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
-    name: 'AboutMe',
-    props: {
-        accentColour: String
-    },
-    data: () => ({
-       skills: [
-           { label: 'VUE', value: 85 },
-           { label: 'MYSQL', value: 83 },
-           { label: 'JAVA', value: 73 },
-           { label: 'PYTHON', value: 80 },
-           { label: 'ETL PROCESS', value: 88 },
-           { label: 'C/C++', value: 65 }
-       ]
-    }),
-    computed: {
-        themeColour () {
-            return { '--accent-colour': this.accentColour }
-        },
-        underlineColour () {
-            return { '--underline-colour': `linear-gradient(${this.accentColour}, transparent) bottom /var(--d, 35%) 4px no-repeat` }
-        }
-    }
+  name: 'AboutMe',
+  data: () => ({
+    techStack: [
+      { label: 'Vue', icon: 'mdi-vuejs' },
+      { label: 'Javascript', icon: 'mdi-language-javascript' },
+      { label: 'Jira', icon: 'mdi-jira' },
+      { label: 'Python', icon: 'mdi-language-python' },
+      { label: 'Nodejs', icon: 'mdi-nodejs' },
+      { label: 'SQL Server', icon: 'mdi-database' },
+      { label: 'Java', icon: 'mdi-language-java' },
+      { label: 'HTML', icon: 'mdi-language-html5' },
+      { label: 'Spring', icon: 'mdi-leaf' },
+      { label: 'Cypress', icon: 'mdi-alpha-c-circle-outline' },
+      { label: 'Github', icon: 'mdi-github' },
+      { label: 'Docker', icon: 'mdi-docker' }
+    ]
+  })
 }
 </script>
 
 <style scoped>
-    h4 {
-        color: var(--accent-colour);
-        font-size: 1.65em;
-        padding-right: 10px;
-    }
-    .bio {
-        max-width: 925px;
-    }
-    .name {
-        color: var(--accent-colour);
-        font-size: 2.5em;
-    }
-    .aboutContainer {
-        min-width: 100%;
-        z-index: 10;
-        background-color: #121212;
-        color: #FFFFFF;
-    }
-    img {
-        max-width: 250px;
-        height: auto;
-        width: auto\9;
-        image-orientation: from-image;
-        border-radius: 50%;
-        border: 5px solid;
-        border-color: var(--accent-colour);
-    }
+  .bio {
+    max-width: 925px;
+  }
+
+  img {
+    max-width: 250px;
+    height: auto;
+    width: auto \9;
+    image-orientation: from-image;
+    border-radius: 50%;
+    border: 2px solid #000000;
+  }
 
 </style>
