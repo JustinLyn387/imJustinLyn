@@ -11,40 +11,31 @@
           <v-col cols="12" v-for="(project, i) in projects" :key="i" md="6" lg="4" class="px-6">
             <v-hover v-slot:default="{ hover }" class="text-right hover">
               <v-card class="rounded-lg justify-center d-flex align-center py-6" :color="project.colour" height="265"
-                      :ripple="false" flat @click="project.showInfo = !project.showInfo">
+                      :ripple="false" flat @click="viewProject(project.link)">
                 <v-icon class="projectIcon ma-12" size="110" color="#FFFFFF">{{ project.icon }}</v-icon>
                 <v-fade-transition>
                   <v-overlay v-if="hover" absolute color="transparent" style="z-index: 1">
                     <v-col cols="10">
-                      <v-row><h2>{{ project.name }}</h2></v-row>
-                      <v-row align="center" class="mt-3 text-body-2">
+                      <v-row align="center" class="mt-3 text-body-1 font-weight-bold">
                         {{ project.tech }}
                       </v-row>
+                      <v-row class="text-body-2">{{ project.type }}</v-row>
                     </v-col>
                     <v-col cols="2" class="flex-column text-right pa-0">
-                      <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-btn v-bind="attrs" v-on="on" large color="#FFFFFF" outlined :href="project.link" target="_blank" icon>
-                            <v-icon color="#FFFFFF">{{  project.btn === 'Visit Website' ? 'mdi-web' : 'mdi-github' }}</v-icon>
-                          </v-btn>
-                        </template>
-                        <span>{{  project.btn }}</span>
-                      </v-tooltip>
+                      <v-icon color="#FFFFFF" large>{{  project.btn === 'Visit Website' ? 'mdi-web' : 'mdi-github' }}</v-icon>
                     </v-col>
                   </v-overlay>
                 </v-fade-transition>
               </v-card>
             </v-hover>
-            <v-row class="ma-2">
-              <p class="mb-1 mb-md-4 text-body-1 font-weight-medium">{{ project.name }}</p>
-              <v-spacer/>
-              <p class="mb-0 text--secondary">{{ project.type }}</p>
+            <v-row class="ma-2 align-center">
+              <p class="mb-0 text-body-1 font-weight-medium">{{ project.name }}</p>
             </v-row>
           </v-col>
         </v-row>
         <div v-else class="mb-7">
           <v-row v-for="(project, i) in projects" :key="i" class="projectRow px-6">
-            <v-col cols="8" md="5" class="d-flex align-center">
+            <v-col cols="8" md="5" class="d-flex align-center" @click="viewProject(project.link)" style="cursor: pointer">
               <v-row class="align-center my-2">
                 <div class="rounded" :style="'background-color: ' + project.colour">
                   <v-icon class="projectIcon my-2 my-md-4 mx-3 mx-md-5" size="30" color="#FFFFFF">{{ project.icon }}</v-icon>
@@ -101,6 +92,16 @@ export default {
         showInfo: false
       },
       {
+        name: 'EV ChargeCycle',
+        tech: 'Vue • Pinia • Firebase',
+        link: 'https://evchargecycle.web.app',
+        type: 'Mobile Web App',
+        icon: 'mdi-car-electric',
+        btn: 'Visit Website',
+        colour: '#007051',
+        showInfo: false
+      },
+      {
         name: 'Cubing Cafe',
         tech: 'Vue • GraphQL • Mongoose',
         link: 'https://thecubingcafe.herokuapp.com/',
@@ -127,7 +128,7 @@ export default {
         type: 'Side Project',
         icon: 'mdi-card-account-details-outline',
         btn: 'View Github',
-        colour: '#1363DF',
+        colour: '#DC143C',
         showInfo: false
       },
       {
@@ -139,19 +140,14 @@ export default {
         btn: 'View Github',
         colour: '#00AD28',
         showInfo: false
-      },
-      {
-        name: 'DFI Chatbot',
-        tech: 'Java • Angular • IBM Watson',
-        link: 'https://github.com/lynjust2/CSCC01-Chatbot-Project',
-        type: 'Group Project',
-        icon: 'mdi-chat-processing-outline',
-        btn: 'View Github',
-        colour: '#DC143C',
-        showInfo: false
       }
     ]
-  })
+  }),
+  methods: {
+    viewProject(link) {
+      window.open(link, '_blank').focus()
+    }
+  }
 }
 </script>
 
